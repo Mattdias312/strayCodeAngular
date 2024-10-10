@@ -322,7 +322,15 @@ db.questionario.insertMany([
         ],
         usuario: 1,
         tributacao: 3,
-        enderecoEmpresa: "Conselheiro Rodrigues, Santos",
+        enderecos: {
+            cep: "11015-900",
+            logradouro: "Avenida Conselheiro Rodrigues Alves",
+            complemento: "s/n",
+            bairro: "Macuco",
+            localidade: "Santos",
+            uf: "SP",
+            regiao: "Sudeste"
+        },
         location: {
             type: "Point",
             coordinates: [-46.301675, -23.965698] // Coordenadas do Porto de Santos
@@ -341,7 +349,15 @@ db.questionario.insertMany([
         ],
         usuario: 2,
         tributacao: 2,
-        enderecoEmpresa: "Avenida Liberdade, Sorocaba",
+        enderecos: {
+            cep: "18087-125",
+            logradouro: "Rodovia Senador José Ermírio de Moraes",
+            complemento: "",
+            bairro: "Iporanga",
+            localidade: "Sorocaba",
+            uf: "SP",
+            regiao: "Sudeste"
+        },
         location: {
             type: "Point",
             coordinates: [-47.367350, -23.428858]  //Flextronics, Sorocaba
@@ -360,7 +376,15 @@ db.questionario.insertMany([
         ],
         usuario: 3,
         tributacao: 1,
-        enderecoEmpresa: "Jerome Case, Sorocaba",
+        enderecos: {
+            cep: "18087-220",
+            logradouro: "Avenida Jerome Case",
+            complemento: "",
+            bairro: "Éden",
+            localidade: "Sorocaba",
+            uf: "SP",
+            regiao: "Sudeste"
+        },
         location: {
             type: "Point",
             coordinates: [-47.391109, -23.432192] //CNHI, Sorocaba
@@ -389,7 +413,6 @@ db.questionario.insertMany([
             cep: "18114-060",
             logradouro: "Rua Amirtes Luvison",
             complemento: "de 2600/2601 ao fim",
-            unidade: "",
             bairro: "Vila Dominguinho",
             localidade: "Votorantim",
             uf: "SP",
@@ -417,7 +440,6 @@ db.questionario.insertMany([
             cep: "18078-005",
             logradouro: "Av. Itavuvu",
             complemento: "de 2600/2601 ao fim",
-            unidade: "",
             bairro: "Jardim Santa Cecília",
             localidade: "Sorocaba",
             uf: "SP",
