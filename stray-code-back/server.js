@@ -5,17 +5,17 @@ const loginRoute = require('./src/route/loginRoute');
 const questionarioRoute = require('./src/route/questionarioRoute');
 const mongoose = require('mongoose');
 const port = 3000;
-// const cors = require('cors');
+const dotenv = require('dotenv');
 
-// app.use(cors());
+dotenv.config();
 
-// // Rota de exemplo
-// app.get('/api/data', (req, res) => {
-//     res.json({ message: 'Olá do Node.js!' });
-//   });
+console.log(process.env.MONGO_URI_LOCAL)
 
-let url = 'mongodb://localhost:27017/StrayCode';
-let mongodb = process.env.MONGODB_URI || url;
+const {MONGO_URI, MONGO_URI_LOCAL} = process.env
+
+let url = MONGO_URI_LOCAL ;
+  
+let mongodb = MONGO_URI_LOCAL || url;
 mongoose.connect(mongodb);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
@@ -30,20 +30,3 @@ app.use(questionarioRoute);
 app.listen(port, () => {
     console.log('Servidor em execução na porta 3000');
 });
-
-// const express = require('express');
-// const app = express();
-// const port = 3000;
-
-// // Middleware para permitir requisições de outros domínios (CORS)
-// const cors = require('cors');
-// app.use(cors());
-
-// // Rota de exemplo
-// app.get('/api/data', (req, res) => {
-//   res.json({ message: 'Olá do Node.js!' });
-// });
-
-// app.listen(port, () => {
-//   console.log(`Servidor rodando na porta ${port}`);
-// });

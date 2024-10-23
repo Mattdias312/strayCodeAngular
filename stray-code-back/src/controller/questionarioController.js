@@ -10,10 +10,7 @@ exports.getquestionario = async function (req, res){
 };
 
 exports.create = function (req, res){
-    console.log(req.body.tipoEmpresa)
-    console.log(req.body.ramoEmpresa)
-    console.log(req.body.cnae)
-    console.log(req.body.usuario)
+
     let questionario = new Questionario(
         {
             tipoEmpresa: req.body.tipoEmpresa,
