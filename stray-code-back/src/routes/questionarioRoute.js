@@ -1,5 +1,5 @@
 const express = require('express')
-const questionarioController = require('../controller/loginController.js')
+const questionarioController = require('../controller/questionarioController.js')
 const router = express.Router()
 const authenticateJWT = require('../middleware/authenticateJwt.js');
 
