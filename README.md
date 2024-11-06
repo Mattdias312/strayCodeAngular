@@ -37,6 +37,6 @@
 
 | NOME | GITHUB |
 | ---  | ---    |
-|Fabricio Rosa Soica | ![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)|
+|Fabricio Rosa Soica | [![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/fabriciosoica)|
 |Matheus Fernandes Dias | [![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/Mattdias312)|
 |Matheus Prado Porciuncula | [![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/mdoisp)|
