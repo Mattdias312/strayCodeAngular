@@ -5,6 +5,18 @@
 <h2>📝  Resumo do Projeto:</h2>
 
 - Este projeto tem por finalidade auxiliar pessoas que desejam abrir empresa, a obter informações pertinentes a este assunto para que consigam de forma adequada administrá-la. Sendo assim, foi desenvolvido um sistema web que permite ao usuário responder um questionário com dados sobre tipo, ramo e atividade de empresa e o sistema mostra informações contábeis e fiscais sobre abertura da empresa em questão. Com isto, o website centraliza informações contábeis, que são requeridas por muitas pessoas que querem empreender ou já são empreendedores, tornando o acesso fácil e rápido a esses dados.
+> _Projeto baseado na metodologia ágil SCRUM, procurando desenvolver a Proatividade, Autonomia, Colaboração e Entrega de Resultados dos estudantes envolvidos_
+
+---
+
+<h2>🐱‍🏍 Entrega de Sprints</h2>
+
+| Sprint | Previsão | Status | Histórico |
+| ---    | ---      | ---    | ---        |
+| 01 | 31/08/2024 | ✔️ Concluída    |    |
+| 02 | 30/09/2024 | ✔️ Concluída    |    |
+| 03 | 31/10/2024 | ✔️ Concluída    |    |
+| 04 | 30/11/2024 | ✔️ Concluída    |    |
 
 ---
 
@@ -27,9 +39,14 @@
 
 ---
 
-<h2>📄  Documentação:</h2>
+<h2>📄  Documentação e Potótipo:</h2>
 
-- Documentação em PDF do projeto: [Clique aqui](https://github.com/Mattdias312/strayCodeAngular/blob/master/ProjetoInterdisciplinar_COMPLETO%202.pdf)
+- Documentação em PDF do projeto: [👉 PDF](https://github.com/Mattdias312/strayCodeAngular/blob/master/ProjetoInterdisciplinar_COMPLETO%202.pdf)
+- Apresentação PowerPoint: [👉 PPT](https://github.com/Mattdias312/strayCodeAngular/blob/master/Apresentac%CC%A7a%CC%83o%20Straycode.pptx)
+- Links dos repositórios do projeto:
+  - Front-End: [👉 Front](https://github.com/Mattdias312/strayCodeAngular/tree/master/stray-code-app)
+  - Back-End: [👉 Back](https://github.com/Mattdias312/strayCodeAngular/tree/master/stray-code-back)
+  - Banco (MongoDB): [👉 Banco](https://github.com/Mattdias312/strayCodeAngular/tree/master/MongoDB_StrayCode)
   
 ---
 
