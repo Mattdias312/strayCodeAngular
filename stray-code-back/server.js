@@ -1,11 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const loginRoute = require('./src/route/loginRoute');
-const questionarioRoute = require('./src/route/questionarioRoute');
+const loginRoute = require('./src/routes/loginRoute');
+const questionarioRoute = require('./src/routes/questionarioRoute');
 const mongoose = require('mongoose');
-const port = 3000;
+const port = 3003;
 const dotenv = require('dotenv');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger_output.json');
 
 dotenv.config();
 
@@ -23,10 +25,12 @@ db.on('error',console.error.bind(console, 'error ao conectar com a base de dados
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extendde: false}));
+app.use('api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(loginRoute);
 app.use(questionarioRoute);
 
 
 app.listen(port, () => {
-    console.log('Servidor em execução na porta 3000');
+    console.log(`Servidor rodando na porta ${port}`);
+    console.log(`Documentação disponível em: https://localhost:3003/api-docs`)
 });
