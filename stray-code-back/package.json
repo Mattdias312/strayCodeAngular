@@ -20,8 +20,11 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.0",
     "express": "^4.21.1",
     "nodemon": "^3.1.7",
-    "swagger-autogen": "^2.23.7"
+    "swagger-autogen": "^2.23.7",
+    "typescript": "^5.6.3"
   }
 }
