@@ -47,7 +47,7 @@ const create = async (req: Request, res: Response) => {
     }
 };
 
-const details = async (req: Request, res: Response) => {
+const details = async (req: Request, res: Response): Promise<any> => {
     try {
         const result = await User.findById(req.body.id);
         res.status(200).json(result);
@@ -56,7 +56,7 @@ const details = async (req: Request, res: Response) => {
     }
 };
 
-const updatePassword = async (req: Request, res: Response) => {
+const updatePassword = async (req: Request, res: Response): Promise<any> => {
     try {
         const updatedPassword = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedPassword) {
@@ -68,7 +68,7 @@ const updatePassword = async (req: Request, res: Response) => {
     }
 };
 
-const deleteLogin = async (req: Request, res: Response) => {
+const deleteLogin = async (req: Request, res: Response): Promise<any> => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.id);
         if (!deletedUser) {

@@ -27,7 +27,7 @@ const create = (_req: Request, res: Response) => {
         });
 };
 
-const details = async (_req: Request, res: Response) => {
+const details = async (_req: Request, res: Response): Promise<any> => {
     try {
         const result = await Questionario.findById(_req.params.id);
         if (!result) {
@@ -39,7 +39,7 @@ const details = async (_req: Request, res: Response) => {
     }
 };
 
-const updateQuestionario = async (_req: Request, res: Response) => {
+const updateQuestionario = async (_req: Request, res: Response): Promise<any> => {
     try {
         const updatedQuestionario = await Questionario.findByIdAndUpdate(_req.params.id, _req.body, { new: true });
         if (!updatedQuestionario) {
@@ -51,7 +51,7 @@ const updateQuestionario = async (_req: Request, res: Response) => {
     }
 };
 
-const deleteQuestionario = async (_req: Request, res: Response) => {
+const deleteQuestionario = async (_req: Request, res: Response): Promise<any> => {
     try {
         const deletedQuestionario = await Questionario.findByIdAndDelete(_req.params.id);
         if (!deletedQuestionario) {

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
+const authenticateJWT = (req: Request, res: Response, next: NextFunction): any => {
   const token = req.header('Authorization')?.split(' ')[1]; // Extrai o token do header Authorization
 
   if (!token) {
