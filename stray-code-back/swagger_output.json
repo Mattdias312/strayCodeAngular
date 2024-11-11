@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "API de Cadastro",
-    "description": "Documentação da API de Cadastro",
+    "title": "Projeto StrayCode",
+    "description": "Documentação do projeto StrayCode",
     "version": "1.0.0"
   },
   "host": "localhost:3003",
@@ -13,7 +13,7 @@
   "paths": {
     "/login": {
       "get": {
-        "description": "",
+        "description": "Responsável por capturar os dados de cadastro de um usuário e verificar se ele consta na base de dados do sistema",
         "responses": {
           "200": {
             "description": "OK"
@@ -30,7 +30,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Responsável por criar um usuário no sistema segundo as informações inseridas pelo mesmo",
         "parameters": [
           {
             "name": "body",
@@ -39,10 +39,10 @@
               "type": "object",
               "properties": {
                 "login": {
-                  "example": "any"
+                  "example": "User123"
                 },
                 "senha": {
-                  "example": "any"
+                  "example": "Password_12345"
                 }
               }
             }
@@ -63,7 +63,7 @@
     },
     "/login/{id}": {
       "get": {
-        "description": "",
+        "description": "Responsável por exibir as informações do usuário que constam na base de dados",
         "parameters": [
           {
             "name": "id",
@@ -93,7 +93,7 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Responsável por atualizar a senha do usuário caso seja exigido pelo mesmo",
         "parameters": [
           {
             "name": "id",
@@ -126,7 +126,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Responsável por deletar um usuário do sistema de cadastro",
         "parameters": [
           {
             "name": "id",
@@ -161,7 +161,7 @@
     },
     "/questionario": {
       "get": {
-        "description": "",
+        "description": "Responsável por capturar os dados preenchidos no questionário",
         "parameters": [
           {
             "name": "Authorization",
@@ -185,7 +185,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Responsável por criar e salvar o questionário na base de dados com as informações preenchidas pelo usuário",
         "parameters": [
           {
             "name": "Authorization",
@@ -199,16 +199,16 @@
               "type": "object",
               "properties": {
                 "tipoEmpresa": {
-                  "example": "any"
+                  "example": "Indústria"
                 },
                 "ramoEmpresa": {
-                  "example": "any"
+                  "example": "Produção Florestal"
                 },
                 "cnae": {
-                  "example": "any"
+                  "example": "Cultivo de eucalipto"
                 },
                 "usuario": {
-                  "example": "any"
+                  "example": "{id} User123"
                 }
               }
             }
@@ -232,7 +232,7 @@
     },
     "/questionario/{id}": {
       "get": {
-        "description": "",
+        "description": "Responsável por capturar e exibir os dados já salvos no banco de dados referente ao questionário respondido pelo usuário",
         "parameters": [
           {
             "name": "id",
@@ -262,7 +262,7 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Responsável por atualizar as respostas do usuário referente ao questionário",
         "parameters": [
           {
             "name": "id",
@@ -295,7 +295,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Responsável por excluir os dados salvos do questionário já respondido",
         "parameters": [
           {
             "name": "id",
