@@ -25,7 +25,7 @@ db.on('error',console.error.bind(console, 'error ao conectar com a base de dados
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extendde: false}));
-app.use('api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(loginRoute);
 app.use(questionarioRoute);
 

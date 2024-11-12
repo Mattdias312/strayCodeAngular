@@ -1,5 +1,6 @@
 var User = require('../model/loginModel');
 const jwt = require('jsonwebtoken');
+const { JWT_SECRET, userID } = require('../middleware/authenticateJWT.js')
 require('dotenv').config();
 
 exports.getLogin = async function (req, res) {
@@ -10,8 +11,8 @@ exports.getLogin = async function (req, res) {
         if (verificaLogin) {
             if(verificaLogin.senha === req.body.senha){
                 const token = jwt.sign({ userID: verificaLogin._id, username: verificaLogin.login}, process.env.JWT_SECRET, {expiresIn: '1h'});
-                res.status(201).send({ message: 'login efetuado' });
-                res.json({token});
+                res.status(201).send({ message: 'login efetuado', token: token });
+                //res.json({token});
             }else{
                 res.status(400).send({ message: 'Usuário e/ou senha incorreto' });
             }
