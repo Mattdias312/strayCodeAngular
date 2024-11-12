@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 const authenticateJWT = (req, res, next) => {
-  const token = req.header('Authorization')?.split(' ')[1]; // Extrai o token do header Authorization
+  const token = req.headers['x-access-token']; // Extrai o token do header Authorization
+
+  console.log('auth  ', token)
 
   if (!token) {
     return res.status(403).json({ message: 'Acesso negado. Token não fornecido.' });
