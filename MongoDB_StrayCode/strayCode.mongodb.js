@@ -1,4 +1,4 @@
-use('strayCode')
+use('StrayCode')
 
 db.tipoEmpresa.insertMany([
     {
@@ -510,7 +510,7 @@ db.escolherContabilidade.insertMany([
     }
 ])
 
-use('strayCode')
+use('StrayCode')
 db.enderecos.insertMany([
     {
         cep: "01001-000",
@@ -533,6 +533,7 @@ db.enderecos.insertMany([
         regiao: "Sudeste",
     }
 ])
-
-use('strayCode')
+/*
+use('StrayCode')
 db.dropDatabase();
+*/

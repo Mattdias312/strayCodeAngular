@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const authenticateJWT = (req, res, next) => {
-  const token = req.headers['x-access-token']; // Extrai o token do header Authorization
+  const token = req.headers['x-access-token']; // Extrai o token do header
 
   console.log('auth  ', token)
 
@@ -10,7 +10,6 @@ const authenticateJWT = (req, res, next) => {
   }
 
   try {
-    // Verifica o token JWT
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded; // Adiciona as informações do usuário ao request
     next();
