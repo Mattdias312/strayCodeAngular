@@ -14,12 +14,26 @@
     "/login": {
       "get": {
         "description": "Responsável por capturar os dados de cadastro de um usuário e verificar se ele consta na base de dados do sistema",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login": {
+                  "example": "User123"
+                },
+                "senha": {
+                  "example": "Password_12345"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "201": {
-            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
