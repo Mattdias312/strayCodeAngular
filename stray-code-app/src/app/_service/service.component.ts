@@ -20,31 +20,6 @@ export class AutorizacaoService {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
-
-  // autorizar(usuario:LoginModel) {
-  //   if (this.isBrowser) {
-  //     this.http.post<any>(`${loginURI}/login`, usuario).subscribe({
-  //       next: (response) => {
-  //         if (response.success) {
-  //           this.autorizado = true;
-  //           localStorage.setItem("login", "SIM");
-  //           console.log("Login realizado com sucesso!");
-  //         } else {
-  //           console.warn("Falha no login: ", response.message);
-  //           this.autorizado = false;
-  //         }
-  //       },
-  //       error: (err) => {
-  //         console.error("Erro ao realizar login: ", err);
-  //         this.autorizado = false;
-  //       }
-  //     });
-  //   } else {
-  //     console.warn("LocalStorage não está disponível no servidor.");
-  //     this.autorizado = false;
-  //   }
-  // }
-
   autorizar(usuario: LoginModel): Observable<boolean> {
     if (this.isBrowser) {
       return this.http.post<any>(`${loginURI}/login`, usuario).pipe(
