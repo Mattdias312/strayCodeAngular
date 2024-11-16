@@ -533,6 +533,10 @@ db.enderecos.insertMany([
         regiao: "Sudeste",
     }
 ])
+
+use('StrayCode')
+db.users.deleteOne({"login": "usuarioTeste"})
+
 /*
 use('StrayCode')
 db.dropDatabase();
