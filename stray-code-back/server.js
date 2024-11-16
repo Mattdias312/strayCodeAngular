@@ -8,10 +8,9 @@ const port = 3003;
 const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger_output.json');
+const cors = require('cors');
 
 dotenv.config();
-
-console.log(process.env.MONGO_URI_LOCAL)
 
 const {MONGO_URI, MONGO_URI_LOCAL} = process.env
 
@@ -23,6 +22,7 @@ mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error',console.error.bind(console, 'error ao conectar com a base de dados'));
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extendde: false}));
 app.use('api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

@@ -4,6 +4,7 @@ import { AutorizacaoService } from '../../_service/service.component';
 import { LoginModel } from './login-model.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryEditComponent } from '../../category.edit/category.edit.component';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -35,8 +36,12 @@ export class LoginComponent implements OnInit{
   alert:boolean = false;
   alertType: String = '';
   alertText: String = '';
-  usaurioExiste: boolean = false;
-  usaurioLogado: boolean = false;
+  usuarioExiste: boolean = false;
+  usuarioLogado: boolean = false;
+  usuario:LoginModel = {
+    usuario: '',
+    senha: ''
+  }
 
   botaoLogin = () =>
     this.autorizacaoService.statusLogin() ? "Sair" : "Entrar";
@@ -49,6 +54,10 @@ export class LoginComponent implements OnInit{
       usuario: this.editableLogin != null ? this.editableLogin.usuario : '',
       senha: this.editableLogin != null ?  this.editableLogin.senha : '',
     });
+    this.usuario = {
+      usuario: '',
+      senha: ''
+    }
   }
 
    async cadastrar(){
@@ -84,41 +93,84 @@ export class LoginComponent implements OnInit{
     }
    }
 
-   async verificaSeUsuarioExiste(){
-    for(const usuario of this.usuarios){
-      if (usuario.usuario == this.usuarioForm.get('usuario')?.value) {
-        return true;
-      }
+  async verificaSeUsuarioExiste(): Promise<boolean> {
+    this.usuario.usuario = this.usuarioForm.get('usuario')?.value;
+    this.usuario.senha = this.usuarioForm.get('senha')?.value;
+
+    try {
+      const resultado = await this.autorizacaoService.cadastrar(this.usuario).toPromise();
+      console.log("Resultado da API:", !resultado);
+      return !resultado; // Retorna o boolean recebido da API
+    } catch (error) {
+      console.error("Erro ao verificar usuário:", error);
+      return false;
     }
-      return false;
-   }
-
-  clickLogin(){
-    this.usuarios.forEach((usuario) => {
-      if(usuario.usuario == this.usuarioForm.get('usuario')?.value
-      && usuario.senha == this.usuarioForm.get('senha')?.value){
-        if (!this.autorizacaoService.statusLogin()) {
-          this.autorizacaoService.autorizar();
-          this.usaurioLogado=true;
-          return true;
-        }
-        return false;
-      }
-      return false;
-    })
-    if(!this.usaurioLogado){
-      this.alert=true
-      this.alertType = 'danger'
-      this.alertText = 'Usuário e/ou senha incorreto'
-      setTimeout(() => this.alert=false, this.timeout)
-      }
-
   }
+
+
+  async clickLogin() {
+    this.usuario.usuario = this.usuarioForm.get('usuario')?.value;
+    this.usuario.senha = this.usuarioForm.get('senha')?.value;
+
+    if (!this.autorizacaoService.statusLogin()) {
+      console.log("Iniciando login...");
+      try {
+        const loginBemSucedido = await firstValueFrom(this.autorizacaoService.autorizar(this.usuario));
+        this.usuarioLogado = loginBemSucedido;
+
+        if (loginBemSucedido) {
+          console.log("Login bem-sucedido");
+          return true;
+        } else {
+          console.log("Falha no login");
+          this.alert = true;
+          this.alertType = 'danger';
+          this.alertText = 'Usuário e/ou senha incorreto';
+          setTimeout(() => (this.alert = false), this.timeout);
+        }
+      } catch (error) {
+        console.error("Erro durante o login:", error);
+        this.alert = true;
+        this.alertType = 'danger';
+        this.alertText = 'Erro no servidor. Tente novamente mais tarde.';
+        setTimeout(() => (this.alert = false), this.timeout);
+      }
+    } else {
+      console.log("Usuário já está logado.");
+      this.usuarioLogado = true;
+    }
+
+    return this.usuarioLogado;
+  }
+
+
+  // clickLogin(){
+  //   this.usuario.usuario = this.usuarioForm.get('usuario')?.value;
+  //   this.usuario.senha = this.usuarioForm.get('senha')?.value;
+  //       if (!this.autorizacaoService.statusLogin()) {
+  //         console.log("sim")
+  //         this.autorizacaoService.autorizar(this.usuario);
+  //         this.usuarioLogado=true;
+  //         return true;
+  //       }else{
+  //         console.log("não")
+  //         this.usuarioLogado=false
+  //       }
+
+  //   if(!this.usuarioLogado){
+  //     this.alert=true
+  //     this.alertType = 'danger'
+  //     this.alertText = 'Usuário e/ou senha incorreto'
+  //     setTimeout(() => this.alert=false, this.timeout)
+  //     }
+  //     return false
+
+  // }
 
   logout(){
     if(this.autorizacaoService.statusLogin()){
       this.autorizacaoService.deslogar();
-      this.usaurioLogado = false;
+      this.usuarioLogado = false;
     }
   }
 }
