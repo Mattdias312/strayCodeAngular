@@ -7,15 +7,13 @@ require('dotenv').config();
 exports.login = async function (req, res) {
 
     try {
-        console.log('login', req.body.usuario, req.body.senha)
         const verificaLogin = await User.findOne({ usuario: req.body.usuario });
         
         if (verificaLogin) {
             if(verificaLogin.senha === req.body.senha){
                 const token = jwt.sign({ userID: verificaLogin._id, username: verificaLogin.usuario}, process.env.JWT_SECRET, {expiresIn: '1h'});
-                res.status(201).send({ message: 'login efetuado', success: true, token: token});
+                res.status(201).send({ message: 'login efetuado', success: true, token: token, id: verificaLogin._id});
 
-                console.log('contrller ',token)
             }else{
                 res.status(400).send({ message: 'Usuário e/ou senha incorreto' });
             }
@@ -50,9 +48,9 @@ exports.create = async function (req, res) {
 
 
 exports.details = async function (req, res) {
+    console.log('details', req.params.id);
     try{
         const result = await User.findById(req.params.id);
-        console.log('details',req.body.id)
         res.status(200).json(result);
     } catch(err) {
         res.status(500).json(err);

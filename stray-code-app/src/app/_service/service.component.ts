@@ -1,8 +1,9 @@
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { LoginModel } from '../_models/login/login-model.component';
 import { catchError, map, Observable, of } from 'rxjs';
+import { response } from 'express';
 
 const loginURI:string = "http://localhost:3003"
 
@@ -28,6 +29,8 @@ export class AutorizacaoService {
             this.autorizado = true;
             localStorage.setItem("login", "SIM");
             console.log("Login realizado com sucesso!");
+            console.log(response);
+            this.detalheUsuario(response.id,response.token)
             return true;
           } else {
             console.warn("Falha no login:", response.message);
@@ -62,6 +65,44 @@ export class AutorizacaoService {
       console.warn("LocalStorage não está disponível no servidor.");
       return of(false);
     }
+  }
+
+  detalheUsuario(id: string, token: string) {
+    if (this.isBrowser) {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+      console.log(`${loginURI}/login/${id}`)
+      console.log('Headers enviados:', headers);
+      console.log('Headers enviados (chaves):', headers.keys());
+      console.log('Content-Type:', headers.get('Content-Type'));
+      console.log('x-access-token:', headers.get('x-access-token'));
+      try {
+      return this.http.get<any>(`${loginURI}/login/${id}`, { headers }).pipe(
+        map((response) => {
+          console.log("result", response);
+          return response.result;
+        }),
+        catchError((err: any) => {
+          console.error("Erro ao realizar login:", err);
+          return of(false);
+        })
+      );
+      // console.log('Antes do HTTP GET');
+      // const resultado = this.http.get<any>(`${loginURI}/login/${id}`, { headers });
+      // console.log('Depois do HTTP GET', resultado);
+      //    return resultado;
+
+
+    }catch (error) {
+      console.error('Erro inesperado no método detalheUsuario:', error);
+      return of(false);
+    }
+    } else {
+      return of(false);
+    }
+
   }
 
 
