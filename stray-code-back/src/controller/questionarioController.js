@@ -2,7 +2,7 @@ var Questionario = require('../model/questionarioModel');
 
 exports.getquestionario = async function (req, res){
     try{
-        const result = await Questionario.find().populate('assignedTo');
+        const result = await Questionario.find().populate('usuario');
         res.status(200).json(result)
     } catch (err) {
         res.status(500).json(err);
