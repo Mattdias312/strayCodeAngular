@@ -4,7 +4,9 @@ require('dotenv').config();
 exports.details = async function (req, res) {
     try{
         const result = await User.findById(req.params.id);
-        console.log('details', req.body.id)
+        if (!result) {
+            return res.status(404).send({ message: "Usuário não encontrado!" });
+        }
         res.status(200).json(result);
     } catch(err) {
         res.status(500).json(err);
@@ -18,7 +20,6 @@ exports.updatePassword = async function (req, res) {
             return res.status(404).send({ message: "Usuário não encontrado!" });
         }
         res.status(200).json(updatedPassword);
-        res.send({ message: "Senha alterada com sucesso!" });
     } catch (err) {
         res.status(500).json({ message: `Erro ao atualizar usuário: ${err.message}` });
     }

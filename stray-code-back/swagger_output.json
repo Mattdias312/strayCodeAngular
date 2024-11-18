@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Projeto StrayCode",
-    "description": "Documentação do projeto StrayCode",
+    "title": "API de Cadastro",
+    "description": "Documentação da API de Cadastro",
     "version": "1.0.0"
   },
   "host": "localhost:3003",
@@ -12,8 +12,8 @@
   ],
   "paths": {
     "/login": {
-      "get": {
-        "description": "Responsável por capturar os dados de cadastro de um usuário e verificar se ele consta na base de dados do sistema",
+      "post": {
+        "description": "Método responsável por verificar e realizar o login de um usuário cadastrado no banco de dados, retornando um JWT(Json Web Token)",
         "parameters": [
           {
             "name": "body",
@@ -22,10 +22,10 @@
               "type": "object",
               "properties": {
                 "login": {
-                  "example": "User123"
+                  "example": "example"
                 },
                 "senha": {
-                  "example": "Password_12345"
+                  "example": "password123"
                 }
               }
             }
@@ -36,15 +36,17 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Incorrect username or/and password"
           },
           "500": {
             "description": "Internal Server Error"
           }
         }
-      },
+      }
+    },
+    "/register": {
       "post": {
-        "description": "Responsável por criar um usuário no sistema segundo as informações inseridas pelo mesmo",
+        "description": "Método responsável por criar um novo usuário no banco de dados",
         "parameters": [
           {
             "name": "body",
@@ -53,10 +55,10 @@
               "type": "object",
               "properties": {
                 "login": {
-                  "example": "User123"
+                  "example": "newUser"
                 },
                 "senha": {
-                  "example": "Password_12345"
+                  "example": "Password123"
                 }
               }
             }
@@ -67,7 +69,7 @@
             "description": "Created"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "User already exists!"
           },
           "500": {
             "description": "Internal Server Error"
@@ -75,9 +77,9 @@
         }
       }
     },
-    "/login/{id}": {
+    "/user/{id}": {
       "get": {
-        "description": "Responsável por exibir as informações do usuário que constam na base de dados",
+        "description": "Método responsável por extrair e mostrar as informações de um usuário cadastrado no banco de dados",
         "parameters": [
           {
             "name": "id",
@@ -86,7 +88,7 @@
             "type": "string"
           },
           {
-            "name": "Authorization",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           }
@@ -101,13 +103,16 @@
           "403": {
             "description": "Forbidden"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
       "put": {
-        "description": "Responsável por atualizar a senha do usuário caso seja exigido pelo mesmo",
+        "description": "Método responsável por alterar a senha de um usuário cadastrado no banco de dados",
         "parameters": [
           {
             "name": "id",
@@ -116,7 +121,7 @@
             "type": "string"
           },
           {
-            "name": "Authorization",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           }
@@ -140,7 +145,7 @@
         }
       },
       "delete": {
-        "description": "Responsável por deletar um usuário do sistema de cadastro",
+        "description": "Método responsável por excluir um usuário do banco de dados",
         "parameters": [
           {
             "name": "id",
@@ -149,7 +154,7 @@
             "type": "string"
           },
           {
-            "name": "Authorization",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           }
@@ -175,10 +180,10 @@
     },
     "/questionario": {
       "get": {
-        "description": "Responsável por capturar os dados preenchidos no questionário",
+        "description": "Método responsável por trazer as informações do questionário respondido pelo usuário e exibir para o mesmo",
         "parameters": [
           {
-            "name": "Authorization",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           }
@@ -199,10 +204,10 @@
         }
       },
       "post": {
-        "description": "Responsável por criar e salvar o questionário na base de dados com as informações preenchidas pelo usuário",
+        "description": "Método responsável por gerar um questionário segundo as informações fornecidas pelo usuário e linká-lo ao mesmo",
         "parameters": [
           {
-            "name": "Authorization",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           },
@@ -216,13 +221,13 @@
                   "example": "Indústria"
                 },
                 "ramoEmpresa": {
-                  "example": "Produção Florestal"
+                  "example": "COLETA, TRATAMENTO E DISPOSIÇÃO DE RESÍDUOS; RECUPERAÇÃO DE MATERIAIS"
                 },
                 "cnae": {
-                  "example": "Cultivo de eucalipto"
+                  "example": "Coleta de resíduos não perigosos"
                 },
                 "usuario": {
-                  "example": "{id} User123"
+                  "example": "user123"
                 }
               }
             }
@@ -246,7 +251,7 @@
     },
     "/questionario/{id}": {
       "get": {
-        "description": "Responsável por capturar e exibir os dados já salvos no banco de dados referente ao questionário respondido pelo usuário",
+        "description": "Método responsável por trazer as informações de um questionário específico",
         "parameters": [
           {
             "name": "id",
@@ -255,7 +260,7 @@
             "type": "string"
           },
           {
-            "name": "Authorization",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           }
@@ -276,7 +281,7 @@
         }
       },
       "put": {
-        "description": "Responsável por atualizar as respostas do usuário referente ao questionário",
+        "description": "Método responsável por alterar as informações de um questionário já cadastrado no banco de dados",
         "parameters": [
           {
             "name": "id",
@@ -285,7 +290,7 @@
             "type": "string"
           },
           {
-            "name": "Authorization",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           }
@@ -309,7 +314,7 @@
         }
       },
       "delete": {
-        "description": "Responsável por excluir os dados salvos do questionário já respondido",
+        "description": "Método responsável por excluir um questionário cadastrado no banco de dados",
         "parameters": [
           {
             "name": "id",
@@ -318,7 +323,7 @@
             "type": "string"
           },
           {
-            "name": "Authorization",
+            "name": "x-access-token",
             "in": "header",
             "type": "string"
           }

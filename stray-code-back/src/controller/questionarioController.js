@@ -2,7 +2,7 @@ var Questionario = require('../model/questionarioModel');
 
 exports.getquestionario = async function (req, res){
     try{
-        const result = await questionario.find().populate('assignedTo');
+        const result = await Questionario.find().populate('usuario');
         res.status(200).json(result)
     } catch (err) {
         res.status(500).json(err);
@@ -29,7 +29,10 @@ exports.create = function (req, res){
 
 exports.details = async function (req, res) {
     try {
-        const result = await questionario.findById(req.params.id);
+        const result = await Questionario.findById(req.params.id);
+        if (!result) {
+            return res.status(404).send({ message: "Projeto não encontrado!" });
+        }
         res.status(200).json(result)
     }catch (err) {
         res.status(500).json(err);
@@ -38,7 +41,7 @@ exports.details = async function (req, res) {
 
 exports.updatequestionario = async function (req, res) {
     try {
-        const updatedquestionario = await questionario.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedquestionario = await Questionario.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedquestionario) {
             return res.status(404).send({ message: "Projeto não encontrado!" });
         }
@@ -50,7 +53,7 @@ exports.updatequestionario = async function (req, res) {
 
 exports.deletequestionario = async function (req, res) {
     try {
-        const deletedquestionario = await questionario.findByIdAndDelete(req.params.id);
+        const deletedquestionario = await Questionario.findByIdAndDelete(req.params.id);
         if (!deletedquestionario) {
             return res.status(404).send({ message: "Projeto não encontrado!" });
         }

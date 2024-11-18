@@ -28,7 +28,7 @@ describe('Teste do método para criar usuário', () => {
 });
 
 describe('Teste dos métodos de login', () => {
-  it('Deve fazer login com sucesso', async () => {
+  it('Deve fazer login com sucesso e retornar um token', async () => {
     const response = await request(app)
       .post('/login')
       .send({
@@ -41,7 +41,19 @@ describe('Teste dos métodos de login', () => {
     expect(response.body).toHaveProperty('token');
   });
 
-  it('Deve falhar ao tentar login com senha incorreta', async () => {
+  it('Deve falhar ao tentar fazer login com usuário incorreto', async () => {
+    const response = await request(app)
+      .post('/login')
+      .send({
+        login: 'usuarioErrado',
+        senha: 'senhaTeste123'
+      });
+
+    expect(response.statusCode).toBe(400);
+    expect(response.body).toHaveProperty('message', 'Usuário e/ou senha incorreto');
+  });
+
+  it('Deve falhar ao tentar fazer login com senha incorreta', async () => {
     const response = await request(app)
       .post('/login')
       .send({
