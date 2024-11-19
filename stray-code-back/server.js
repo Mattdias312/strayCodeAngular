@@ -32,5 +32,5 @@ app.use(questionarioRoute);
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
-    console.log(`Documentação disponível em: https://localhost:3003/api-docs`)
+    console.log(`Documentação disponível em: https://localhost:3003/api-docs`);
 });

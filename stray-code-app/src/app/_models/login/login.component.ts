@@ -115,19 +115,33 @@ export class LoginComponent implements OnInit{
     if (!this.autorizacaoService.statusLogin()) {
       console.log("Iniciando login...");
       try {
-        const loginBemSucedido = await firstValueFrom(this.autorizacaoService.autorizar(this.usuario));
-        this.usuarioLogado = loginBemSucedido;
+        // const loginBemSucedido = 
+        this.autorizacaoService.autorizar(this.usuario).subscribe(async (response) => {
+          const token = response.token;
 
-        if (loginBemSucedido) {
-          console.log("Login bem-sucedido");
-          return true;
-        } else {
-          console.log("Falha no login");
-          this.alert = true;
-          this.alertType = 'danger';
-          this.alertText = 'Usuário e/ou senha incorreto';
-          setTimeout(() => (this.alert = false), this.timeout);
-        }
+          this.usuarioLogado = !!token;
+
+          if (this.usuarioLogado) {
+            console.log("Login bem-sucedido");
+          } else {
+
+          }
+
+          console.log("usuario logado", this.usuarioLogado);
+
+          console.log("Response", response, token);
+          this.autorizacaoService.detalheUsuario(response.id,response.token).subscribe((response2: any) => {
+              console.log("2nd response", response2);
+              
+          })
+      }, (_error) => {
+            console.log("Falha no login");
+            this.alert = true;
+            this.alertType = 'danger';
+            this.alertText = 'Usuário e/ou senha incorreto';
+            setTimeout(() => (this.alert = false), this.timeout);
+      })
+
       } catch (error) {
         console.error("Erro durante o login:", error);
         this.alert = true;
