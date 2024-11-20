@@ -60,16 +60,16 @@ Para garantir a clareza e transparência durante o desenvolvimento do StrayCode,
 🔗 Links Úteis:
 - Documentação em PDF do projeto: [PDF](https://github.com/Mattdias312/strayCodeAngular/blob/master/ProjetoInterdisciplinar_COMPLETO%202.pdf)
 - Links dos repositórios do projeto:
-  - Front-End: [Front](https://github.com/Mattdias312/strayCodeAngular/tree/master/stray-code-app)
-  - Back-End: [Back](https://github.com/Mattdias312/strayCodeAngular/tree/master/stray-code-back)
+  - Front-End: [Link Front](https://github.com/Mattdias312/strayCodeAngular/tree/master/stray-code-app)
+  - Back-End: [Link Back](https://github.com/Mattdias312/strayCodeAngular/tree/master/stray-code-back)
       - Microsserviços:
-        - Autenticação JWT: [JWT](https://github.com/Mattdias312/strayCodeAngular/tree/master/stray-code-back/src/middleware)
-        - Autenticação de usuário: [Login](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/src/controller/loginController.js)
-        - Métodos do usuário: [User](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/src/controller/userController.js)
+        - Autenticação JWT: [link JWT](https://github.com/Mattdias312/strayCodeAngular/tree/master/stray-code-back/src/middleware)
+        - Autenticação de usuário: [Link Login](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/src/controller/loginController.js)
+        - Métodos do usuário: [Link User](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/src/controller/userController.js)
       - Testes:
-        - Testes de login: [Clique aqui!](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/__tests__/01_login.test.js)
-        - Testes de usuário: [Clique aqui!](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/__tests__/02_user.test.js)
-        - Testes do questionário: [Clique aqui!](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/__tests__/03_questionario.test.js)
+        - Testes de login: [Link do teste](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/__tests__/01_login.test.js)
+        - Testes de usuário: [Link do teste](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/__tests__/02_user.test.js)
+        - Testes do questionário: [Link do teste](https://github.com/Mattdias312/strayCodeAngular/blob/master/stray-code-back/__tests__/03_questionario.test.js)
   - Banco (MongoDB): [Banco](https://github.com/Mattdias312/strayCodeAngular/tree/master/MongoDB_StrayCode)
 - Documentação das APIs: [Swagger]()
   
