@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const loginRoute = require('./src/routes/loginRoute');
-const userRoute = require('./src/routes/userRoute')
-const questionarioRoute = require('./src/routes/questionarioRoute');
+const loginRoute = require('./routes/loginRoute');
+const userRoute = require('./routes/userRoute')
+const questionarioRoute = require('./routes/questionarioRoute');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger_output.json');
+const swaggerDocument = require('../swagger_output.json');
 
 dotenv.config();
 
