@@ -3,6 +3,7 @@ import { MaterialModule } from '../../material.module';
 import { AutorizacaoService } from '../../_service/service.component';
 import { LoginModel } from './login-model.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 import { CategoryEditComponent } from '../../category.edit/category.edit.component';
 import { firstValueFrom } from 'rxjs';
 
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit{
   @Input() public editableLogin!: LoginModel;
 
   constructor(public formBuilder: FormBuilder,
-    public autorizacaoService:AutorizacaoService) {  }
+    public autorizacaoService:AutorizacaoService,
+    private cookieService: CookieService) {  }
 
   usuarios:LoginModel[] = [] as LoginModel[];
   novoUsuario:LoginModel = {} as LoginModel;
@@ -41,6 +43,11 @@ export class LoginComponent implements OnInit{
   usuario:LoginModel = {
     usuario: '',
     senha: ''
+  }
+  infoUsuario={
+    usuario:'',
+    id:'',
+    token:''
   }
 
   botaoLogin = () =>
@@ -58,6 +65,8 @@ export class LoginComponent implements OnInit{
       usuario: '',
       senha: ''
     }
+    console.log("cookie ID",this.cookieService.get('id'));
+    console.log("cookie token",this.cookieService.get('token'));
   }
 
    async cadastrar(){
@@ -115,13 +124,16 @@ export class LoginComponent implements OnInit{
     if (!this.autorizacaoService.statusLogin()) {
       console.log("Iniciando login...");
       try {
-        // const loginBemSucedido = 
         this.autorizacaoService.autorizar(this.usuario).subscribe(async (response) => {
           const token = response.token;
 
           this.usuarioLogado = !!token;
 
           if (this.usuarioLogado) {
+            this.cookieService.set('id',response.id,1/24)
+            this.cookieService.set('token',response.token,1/24)
+            this.infoUsuario.token = token;
+            localStorage.setItem("login", "SIM");
             console.log("Login bem-sucedido");
           } else {
 
@@ -132,7 +144,10 @@ export class LoginComponent implements OnInit{
           console.log("Response", response, token);
           this.autorizacaoService.detalheUsuario(response.id,response.token).subscribe((response2: any) => {
               console.log("2nd response", response2);
-              
+            this.infoUsuario.id = response2._id
+            this.infoUsuario.usuario = response2.usuario
+            console.log("cookie ID",this.cookieService.get('id'));
+            console.log("cookie token",this.cookieService.get('token'));
           })
       }, (_error) => {
             console.log("Falha no login");
@@ -157,34 +172,12 @@ export class LoginComponent implements OnInit{
     return this.usuarioLogado;
   }
 
-
-  // clickLogin(){
-  //   this.usuario.usuario = this.usuarioForm.get('usuario')?.value;
-  //   this.usuario.senha = this.usuarioForm.get('senha')?.value;
-  //       if (!this.autorizacaoService.statusLogin()) {
-  //         console.log("sim")
-  //         this.autorizacaoService.autorizar(this.usuario);
-  //         this.usuarioLogado=true;
-  //         return true;
-  //       }else{
-  //         console.log("não")
-  //         this.usuarioLogado=false
-  //       }
-
-  //   if(!this.usuarioLogado){
-  //     this.alert=true
-  //     this.alertType = 'danger'
-  //     this.alertText = 'Usuário e/ou senha incorreto'
-  //     setTimeout(() => this.alert=false, this.timeout)
-  //     }
-  //     return false
-
-  // }
-
   logout(){
     if(this.autorizacaoService.statusLogin()){
       this.autorizacaoService.deslogar();
       this.usuarioLogado = false;
+      this.cookieService.delete('id');
+      this.cookieService.delete('token');
     }
   }
 }

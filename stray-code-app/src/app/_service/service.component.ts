@@ -22,34 +22,8 @@ export class AutorizacaoService {
   }
 
   autorizar(usuario: LoginModel) {
-    let token;
-    // if (this.isBrowser) {
       return this.http.post<any>(`${loginURI}/login`, usuario);
-            
-      // pipe(
-      //   map((response) => {
-      //     if (response.success) {
-      //       this.autorizado = true;
-      //       localStorage.setItem("login", "SIM");
-      //       console.log("Login realizado com sucesso!");
-      //       console.log(response);
-      //       this.detalheUsuario(response.id,response.token)
-      //       return true;
-      //     } else {
-      //       console.warn("Falha no login:", response.message);
-      //       this.autorizado = false;
-      //       return false;
-      //     }
-      //   }),
-      //   catchError((err) => {
-      //     console.error("Erro ao realizar login:", err);
-      //     this.autorizado = false;
-      //     return of(false); // Retorna `false` em caso de erro
-      //   })
-      // );
-    // } else {
-      // console.warn("LocalStorage não está disponível no servidor.");
-    // }
+
   }
 
 
@@ -81,10 +55,6 @@ export class AutorizacaoService {
       console.log('x-access-token:', headers.get('x-access-token'));
       try {
         return this.http.get<any>(`${loginURI}/login/${id}`, { headers });
-      // console.log('Antes do HTTP GET');
-      // const resultado = this.http.get<any>(`${loginURI}/login/${id}`, { headers });
-      // console.log('Depois do HTTP GET', resultado);
-      //    return resultado;
 
 
     }catch (error) {
