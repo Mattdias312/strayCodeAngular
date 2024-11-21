@@ -54,7 +54,7 @@ export class AutorizacaoService {
       console.log('Content-Type:', headers.get('Content-Type'));
       console.log('x-access-token:', headers.get('x-access-token'));
       try {
-        return this.http.get<any>(`${loginURI}/login/${id}`, { headers });
+        return this.http.get<any>(`${loginURI}/user/${id}`, { headers });
 
 
     }catch (error) {
