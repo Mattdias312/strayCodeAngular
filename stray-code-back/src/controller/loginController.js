@@ -1,6 +1,7 @@
 var User = require('../model/userModel');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, userId } = require('../middleware/authenticateJWT.js')
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 
@@ -10,8 +11,11 @@ exports.login = async function (req, res) {
         const verificaLogin = await User.findOne({ usuario: req.body.usuario });
         
         if (verificaLogin) {
-            if(verificaLogin.senha === req.body.senha){
-                const token = jwt.sign({ userID: verificaLogin._id, username: verificaLogin.usuario}, process.env.JWT_SECRET, {expiresIn: '1h'});
+            // Compara a senha fornecida com a senha criptografada armazenada
+            const isMatch = await bcrypt.compare(req.body.senha, verificaLogin.senha);
+            if (isMatch) {
+                const token = jwt.sign({userID: verificaLogin._id, username: verificaLogin.usuario},
+                                        process.env.JWT_SECRET, {expiresIn: '1h'});
                 res.status(201).send({ message: 'login efetuado', success: true, token: token, id: verificaLogin._id});
 
             }else{
