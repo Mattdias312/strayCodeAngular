@@ -3,7 +3,9 @@ import { MaterialModule } from '../../material.module';
 import { AutorizacaoService } from '../../_service/service.component';
 import { LoginModel } from './login-model.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 import { CategoryEditComponent } from '../../category.edit/category.edit.component';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -27,7 +29,8 @@ export class LoginComponent implements OnInit{
   @Input() public editableLogin!: LoginModel;
 
   constructor(public formBuilder: FormBuilder,
-    public autorizacaoService:AutorizacaoService) {  }
+    public autorizacaoService:AutorizacaoService,
+    private cookieService: CookieService) {  }
 
   usuarios:LoginModel[] = [] as LoginModel[];
   novoUsuario:LoginModel = {} as LoginModel;
@@ -35,8 +38,17 @@ export class LoginComponent implements OnInit{
   alert:boolean = false;
   alertType: String = '';
   alertText: String = '';
-  usaurioExiste: boolean = false;
-  usaurioLogado: boolean = false;
+  usuarioExiste: boolean = false;
+  usuarioLogado: boolean = false;
+  usuario:LoginModel = {
+    usuario: '',
+    senha: ''
+  }
+  infoUsuario={
+    usuario:'',
+    id:'',
+    token:''
+  }
 
   botaoLogin = () =>
     this.autorizacaoService.statusLogin() ? "Sair" : "Entrar";
@@ -49,6 +61,12 @@ export class LoginComponent implements OnInit{
       usuario: this.editableLogin != null ? this.editableLogin.usuario : '',
       senha: this.editableLogin != null ?  this.editableLogin.senha : '',
     });
+    this.usuario = {
+      usuario: '',
+      senha: ''
+    }
+    console.log("cookie ID",this.cookieService.get('id'));
+    console.log("cookie token",this.cookieService.get('token'));
   }
 
    async cadastrar(){
@@ -84,41 +102,82 @@ export class LoginComponent implements OnInit{
     }
    }
 
-   async verificaSeUsuarioExiste(){
-    for(const usuario of this.usuarios){
-      if (usuario.usuario == this.usuarioForm.get('usuario')?.value) {
-        return true;
-      }
+  async verificaSeUsuarioExiste(): Promise<boolean> {
+    this.usuario.usuario = this.usuarioForm.get('usuario')?.value;
+    this.usuario.senha = this.usuarioForm.get('senha')?.value;
+
+    try {
+      const resultado = await this.autorizacaoService.cadastrar(this.usuario).toPromise();
+      console.log("Resultado da API:", !resultado);
+      return !resultado; // Retorna o boolean recebido da API
+    } catch (error) {
+      console.error("Erro ao verificar usuário:", error);
+      return false;
     }
-      return false;
-   }
+  }
 
-  clickLogin(){
-    this.usuarios.forEach((usuario) => {
-      if(usuario.usuario == this.usuarioForm.get('usuario')?.value
-      && usuario.senha == this.usuarioForm.get('senha')?.value){
-        if (!this.autorizacaoService.statusLogin()) {
-          this.autorizacaoService.autorizar();
-          this.usaurioLogado=true;
-          return true;
-        }
-        return false;
-      }
-      return false;
-    })
-    if(!this.usaurioLogado){
-      this.alert=true
-      this.alertType = 'danger'
-      this.alertText = 'Usuário e/ou senha incorreto'
-      setTimeout(() => this.alert=false, this.timeout)
-      }
 
+  async clickLogin() {
+    this.usuario.usuario = this.usuarioForm.get('usuario')?.value;
+    this.usuario.senha = this.usuarioForm.get('senha')?.value;
+
+    if (!this.autorizacaoService.statusLogin()) {
+      console.log("Iniciando login...");
+      try {
+        this.autorizacaoService.autorizar(this.usuario).subscribe(async (response) => {
+          const token = response.token;
+
+          this.usuarioLogado = !!token;
+
+          if (this.usuarioLogado) {
+            this.cookieService.set('id',response.id,1/24)
+            this.cookieService.set('token',response.token,1/24)
+            this.infoUsuario.token = token;
+            localStorage.setItem("login", "SIM");
+            console.log("Login bem-sucedido");
+          } else {
+
+          }
+
+          console.log("usuario logado", this.usuarioLogado);
+
+          console.log("Response", response, token);
+          this.autorizacaoService.detalheUsuario(response.id,response.token).subscribe((response2: any) => {
+              console.log("2nd response", response2);
+            this.infoUsuario.id = response2._id
+            this.infoUsuario.usuario = response2.usuario
+            console.log("cookie ID",this.cookieService.get('id'));
+            console.log("cookie token",this.cookieService.get('token'));
+          })
+      }, (_error) => {
+            console.log("Falha no login");
+            this.alert = true;
+            this.alertType = 'danger';
+            this.alertText = 'Usuário e/ou senha incorreto';
+            setTimeout(() => (this.alert = false), this.timeout);
+      })
+
+      } catch (error) {
+        console.error("Erro durante o login:", error);
+        this.alert = true;
+        this.alertType = 'danger';
+        this.alertText = 'Erro no servidor. Tente novamente mais tarde.';
+        setTimeout(() => (this.alert = false), this.timeout);
+      }
+    } else {
+      console.log("Usuário já está logado.");
+      this.usuarioLogado = true;
+    }
+
+    return this.usuarioLogado;
   }
 
   logout(){
     if(this.autorizacaoService.statusLogin()){
       this.autorizacaoService.deslogar();
-      this.usaurioLogado = false;
+      this.usuarioLogado = false;
+      this.cookieService.delete('id');
+      this.cookieService.delete('token');
     }
   }
 }

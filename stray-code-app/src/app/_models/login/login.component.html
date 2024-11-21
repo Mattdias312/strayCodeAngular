@@ -25,6 +25,12 @@
                     <input type="password" formControlName = "senha" class="form-control" name="senha" id="senha" placeholder="senha">
                 </div>
             </form>
+        }@else {
+          <div>
+            <label for="">id {{infoUsuario.id}}</label>
+            <label for="">token {{infoUsuario.token}}</label>
+            <label for="">usuario {{infoUsuario.usuario}}</label>
+          </div>
         }
         <div class="flx-center-row flx-evly">
               @if (!autorizacaoService.statusLogin()) {

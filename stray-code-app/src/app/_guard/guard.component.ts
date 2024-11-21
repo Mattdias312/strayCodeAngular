@@ -8,7 +8,7 @@ export const autorizacaoGuard = () => {
     const router = inject(Router);
 
   if (autorizaService.statusLogin()) {
-      autorizaService.autorizar();
+      // autorizaService.autorizar(autorizaService.);
       return true;
   }else{
       autorizaService.deslogar();

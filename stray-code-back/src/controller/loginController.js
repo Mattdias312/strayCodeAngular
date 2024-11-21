@@ -7,16 +7,13 @@ require('dotenv').config();
 exports.login = async function (req, res) {
 
     try {
-        const verificaLogin = await User.findOne({ login: req.body.login });
+        const verificaLogin = await User.findOne({ usuario: req.body.usuario });
         
         if (verificaLogin) {
             if(verificaLogin.senha === req.body.senha){
-                const token = jwt.sign(
-                    { userID: verificaLogin._id, username: verificaLogin.login},
-                    process.env.JWT_SECRET, {expiresIn: '1h'}
-                );
-                res.status(201).send({ message: 'login efetuado', token: token });
-                console.log('controller', token)
+                const token = jwt.sign({ userID: verificaLogin._id, username: verificaLogin.usuario}, process.env.JWT_SECRET, {expiresIn: '1h'});
+                res.status(201).send({ message: 'login efetuado', success: true, token: token, id: verificaLogin._id});
+
             }else{
                 res.status(400).send({ message: 'Usuário e/ou senha incorreto' });
             }
@@ -31,19 +28,20 @@ exports.login = async function (req, res) {
 exports.create = async function (req, res) {
     
     try {
-        const verificaLogin = await User.findOne({ login: req.body.login });
+        console.log('create', req.body.usuario, req.body.senha)
+        const verificaLogin = await User.findOne({ usuario: req.body.usuario });
         
         if (!verificaLogin) {
             let user = new User({
-                login: req.body.login,
+                usuario: req.body.usuario,
                 senha: req.body.senha
             });
             await user.save();
-            res.status(201).send({ message: 'Usuário criado com sucesso!' });
+            res.status(201).send({ message: 'Usuário criado com sucesso!', success: true });
         } else {
-            res.status(400).send({ message: 'Usuário já existe!' });
+            res.status(400).send({ message: 'Usuário já existe!'});
         }
     } catch (error) {
-        res.status(500).send({ message: 'Erro ao criar usuário.', error: error.message });
+        res.status(500).send({ message: 'Erro ao criar usuário.', error: error.message, success: false });
     }
 };
