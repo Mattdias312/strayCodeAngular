@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "start": "node ./startServer.js",
-    "dev": "nodemon startServer.js",
+    "start": "node ./src/index.js",
+    "dev": "nodemon src/index.js",
     "doc": "node swagger.js"
   },
   "author": "",
