@@ -3,7 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { CategoryComponent } from './category/category.component';
 import { AboutComponent } from './about/about.component';
 import { autorizacaoGuard } from './_guard/guard.component';
-import { LoginComponent } from './_models/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { AbrirEmpresaComponent } from './abrir-empresa/abrir-empresa.component';
 import { ContabilidadeComponent } from './contabilidade/contabilidade.component';
 import { MarketingComponent } from './marketing/marketing.component';
@@ -13,6 +13,7 @@ import { CnaeComponent } from './cnae/cnae.component';
 import { TributacaoComponent } from './tributacao/tributacao.component';
 import { QuestionarioComponent } from './questionario/questionario.component';
 import { PeriodicaComponent } from './periodica/periodica.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,8 @@ export const routes: Routes = [
   { path: 'tributacao', component: TributacaoComponent},
   { path: 'questionario', component: QuestionarioComponent, canActivate: [autorizacaoGuard]},
   { path: 'periodica', component: PeriodicaComponent},
+  { path: 'perfil', component: PerfilComponent},
+
 
   { path: '**', component: HomeComponent},
 

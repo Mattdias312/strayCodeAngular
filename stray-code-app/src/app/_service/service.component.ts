@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { LoginModel } from '../_models/login/login-model.component';
+import { LoginModel } from '../login/login-model.component';
 import { catchError, map, Observable, of } from 'rxjs';
 import { response } from 'express';
 

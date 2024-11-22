@@ -1,11 +1,12 @@
 import { Component, OnInit, Injectable, Input } from '@angular/core';
-import { MaterialModule } from '../../material.module';
-import { AutorizacaoService } from '../../_service/service.component';
+import { MaterialModule } from '../material.module';
+import { AutorizacaoService } from '../_service/service.component';
 import { LoginModel } from './login-model.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { CategoryEditComponent } from '../../category.edit/category.edit.component';
+import { CategoryEditComponent } from '../category.edit/category.edit.component';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit{
 
   constructor(public formBuilder: FormBuilder,
     public autorizacaoService:AutorizacaoService,
-    private cookieService: CookieService) {  }
+    private cookieService: CookieService,
+    private router: Router) {  }
 
   usuarios:LoginModel[] = [] as LoginModel[];
   novoUsuario:LoginModel = {} as LoginModel;
@@ -135,6 +137,8 @@ export class LoginComponent implements OnInit{
             this.infoUsuario.token = token;
             localStorage.setItem("login", "SIM");
             console.log("Login bem-sucedido");
+            this.router.navigate(['/perfil'])
+            
           } else {
 
           }
@@ -142,13 +146,13 @@ export class LoginComponent implements OnInit{
           console.log("usuario logado", this.usuarioLogado);
 
           console.log("Response", response, token);
-          this.autorizacaoService.detalheUsuario(response.id,response.token).subscribe((response2: any) => {
-              console.log("2nd response", response2);
-            this.infoUsuario.id = response2._id
-            this.infoUsuario.usuario = response2.usuario
-            console.log("cookie ID",this.cookieService.get('id'));
-            console.log("cookie token",this.cookieService.get('token'));
-          })
+          // this.autorizacaoService.detalheUsuario(response.id,response.token).subscribe((response2: any) => {
+          //     console.log("2nd response", response2);
+          //   this.infoUsuario.id = response2._id
+          //   this.infoUsuario.usuario = response2.usuario
+          //   console.log("cookie ID",this.cookieService.get('id'));
+          //   console.log("cookie token",this.cookieService.get('token'));
+          // })
       }, (_error) => {
             console.log("Falha no login");
             this.alert = true;
