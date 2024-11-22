@@ -15,6 +15,12 @@ exports.details = async function (req, res) {
 
 exports.updatePassword = async function (req, res) {
     try {
+        if (!req.body.senha || req.body.senha.trim() === "") {
+            return res.status(400).send({ message: "A senha não pode ser vazia." });
+        }
+        if (req.body.senha.length < 6) {
+            return res.status(400).send({ message: "A senha deve ter pelo menos 6 caracteres." });
+        }
         const updatedPassword = await User.findByIdAndUpdate(req.params.id, req.body, { new: true }).select('-senha');
         if (!updatedPassword) {
             return res.status(404).send({ message: "Usuário não encontrado!" });

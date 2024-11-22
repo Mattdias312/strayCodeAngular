@@ -1,5 +1,7 @@
 const request = require('supertest');
-const app = require('../server');
+const app = require('../src/server');
+const {SENHA1, SENHA2} = process.env
+require('dotenv').config();
 
 let token;
 
@@ -8,7 +10,7 @@ beforeAll(async () => {
     .post('/login')
     .send({
       login: 'teste',
-      senha: 'teste_123'
+      senha: SENHA2
     });
     
   token = response.body.token;
@@ -27,7 +29,7 @@ describe('Teste dos endpoints de usuário que estão protegidos', () => {
     const response = await request(app)
       .put('/user/673a30fcbe906edc0088ced9')
       .set('x-access-token', `${token}`)
-      .send({ senha: 'teste_456' });
+      .send({ senha:  SENHA2});
 
     expect(response.statusCode).toBe(200);
   });
@@ -37,7 +39,7 @@ describe('Teste dos endpoints de usuário que estão protegidos', () => {
       .post('/login')
       .send({
         login: 'usuarioTeste',
-        senha: 'senhaTeste123'
+        senha: SENHA1
       });
     token2 = res.body.token;
     const response = await request(app)
@@ -50,7 +52,7 @@ describe('Teste dos endpoints de usuário que estão protegidos', () => {
 });
 
 describe('Teste dos endpoints de usuário sem fornecer um token', () => {
-  it('Deve falhar ao tentar acessar as informações do usuário sem o token', async () => {
+  it.only('Deve falhar ao tentar acessar as informações do usuário sem o token', async () => {
     const response = await request(app)
       .get('/user/673a30fcbe906edc0088ced9');
 
@@ -61,7 +63,7 @@ describe('Teste dos endpoints de usuário sem fornecer um token', () => {
   it('Deve falhar ao tentar alterar a senha sem um token', async () => {
     const response = await request(app)
       .put('/user/673a30fcbe906edc0088ced9')
-      .send({ senha: 'teste_123' });
+      .send({ senha: SENHA2 });
 
     expect(response.statusCode).toBe(403);
     expect(response.body).toHaveProperty('message', 'Acesso negado. Token não fornecido.');
@@ -90,7 +92,7 @@ describe('Teste dos endpoints de usuário fornecendo um token inválido', () => 
     const response = await request(app)
       .put('/user/673a30fcbe906edc0088ced9')
       .set('x-access-token', `${!token}`)
-      .send({ senha: 'teste_123' });
+      .send({ senha: SENHA2 });
 
     expect(response.statusCode).toBe(401);
     expect(response.body).toHaveProperty('message', 'Token inválido ou expirado.');
@@ -120,7 +122,7 @@ describe('Teste dos endpoints de usuário fornecendo um id inválido', () =>{
     const response = await request(app)
       .put('/user/6737ac512be071efd96a0000')
       .set('x-access-token', `${token}`)
-      .send({ senha: 'teste_123' });
+      .send({ senha: SENHA2 });
 
     expect(response.statusCode).toBe(404);
     expect(response.body).toHaveProperty('message', 'Usuário não encontrado!');

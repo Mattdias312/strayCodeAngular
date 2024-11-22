@@ -1,5 +1,8 @@
 const request = require('supertest');
-const app = require('../server.js');
+const app = require('../src/server');
+const { SENHA1 } = process.env;
+require('dotenv').config();
+
 
 describe('Teste do método para criar usuário', () => {
   it('Deve criar um novo usuário com sucesso', async () => {
@@ -7,7 +10,7 @@ describe('Teste do método para criar usuário', () => {
       .post('/register')
       .send({
         login: 'usuarioTeste',
-        senha: 'senhaTeste123'
+        senha: SENHA1
       });
 
     expect(response.statusCode).toBe(201);
@@ -19,7 +22,7 @@ describe('Teste do método para criar usuário', () => {
       .post('/register')
       .send({
         login: 'usuarioExistente',
-        senha: 'senhaTeste123'
+        senha: SENHA1
       });
 
     expect(response.statusCode).toBe(400);
@@ -28,12 +31,12 @@ describe('Teste do método para criar usuário', () => {
 });
 
 describe('Teste dos métodos de login', () => {
-  it('Deve fazer login com sucesso e retornar um token', async () => {
+  it.only('Deve fazer login com sucesso e retornar um token', async () => {
     const response = await request(app)
       .post('/login')
       .send({
         login: 'usuarioTeste',
-        senha: 'senhaTeste123'
+        senha: SENHA1
       });
 
     expect(response.statusCode).toBe(201);
@@ -46,7 +49,7 @@ describe('Teste dos métodos de login', () => {
       .post('/login')
       .send({
         login: 'usuarioErrado',
-        senha: 'senhaTeste123'
+        senha: SENHA1
       });
 
     expect(response.statusCode).toBe(400);

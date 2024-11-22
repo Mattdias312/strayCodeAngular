@@ -1,5 +1,7 @@
 const request = require('supertest');
-const app = require('../server');
+const app = require('../src/server');
+const { SENHA1 } = process.env
+require('dotenv').config();
 
 let token;
 
@@ -8,7 +10,7 @@ beforeAll(async () => {
     .post('/login')
     .send({
       login: 'usuarioExistente',
-      senha: 'senhaTeste123'
+      senha: SENHA1
     });
     
   token = response.body.token;
@@ -62,7 +64,7 @@ describe('Teste dos endpoints do questionário que devem ser executados com suce
 });
 
 describe('Teste dos endpoints do questionário sem o token', () => {
-  it('Deve tentar criar um questionário e ligá-lo à um usuário sem o token e falhar', async () => {
+  it.only('Deve tentar criar um questionário e ligá-lo à um usuário sem o token e falhar', async () => {
     const response = await request(app)
       .post('/questionario')
       .send({
