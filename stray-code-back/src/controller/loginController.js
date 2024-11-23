@@ -28,7 +28,6 @@ exports.login = async function (req, res) {
 exports.create = async function (req, res) {
     
     try {
-        console.log('create', req.body.usuario, req.body.senha)
         const verificaLogin = await User.findOne({ usuario: req.body.usuario });
         
         if (!verificaLogin) {

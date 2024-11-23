@@ -1,9 +1,16 @@
-<div>
+  <div class="col-md-4">
     <label for="">id {{infoUsuario.id}}</label>
     <label for="">token {{infoUsuario.token}}</label>
     <label for="">usuario {{infoUsuario.usuario}}</label>
   </div>
 
-  <mat-card-actions class="flx-center-row">
+  <div class="col-md-2">
+    <input type="text" class="form-control" [value]="infoUsuario.usuario" size="200" disabled>
+  </div>
+
+  <mat-card-actions class="d-flex justify-content-evenly align-items-center">
+    <button mat-raised-button color="warn" (click)="deletar()">Deletar</button>
+    <button mat-raised-button color="primary" >Redefinir Senha</button>
     <button mat-raised-button color="primary" (click)="logout()">Sair</button>
-</mat-card-actions>
+  </mat-card-actions>
+

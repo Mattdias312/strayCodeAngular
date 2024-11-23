@@ -55,8 +55,6 @@ export class AutorizacaoService {
       console.log('x-access-token:', headers.get('x-access-token'));
       try {
         return this.http.get<any>(`${loginURI}/user/${id}`, { headers });
-
-
     }catch (error) {
       console.error('Erro inesperado no método detalheUsuario:', error);
       return of(false);
@@ -65,6 +63,25 @@ export class AutorizacaoService {
       return of(false);
     }
 
+  }
+
+  deletarUsuario(id: string, token: string){
+
+    if(this.isBrowser){
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+      console.log("delete", `${loginURI}/user/${id}`)
+      try {
+        return this.http.delete<any>(`${loginURI}/user/${id}`, { headers });
+      } catch (error) {
+        console.error('Erro inesperado no método deletarUsuario:', error);
+        return of(false);
+      }
+    } else {
+      return of(false);
+    }
   }
 
 

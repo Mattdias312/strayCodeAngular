@@ -26,6 +26,7 @@ exports.updatePassword = async function (req, res) {
 };
 
 exports.deleteUser = async function (req, res) {
+    console.log("deleting")
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.id);
         if (!deletedUser) {

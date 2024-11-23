@@ -44,19 +44,14 @@ export class PerfilComponent implements OnInit{
 
 
     ngOnInit(): void {
-      this.autorizacaoService.detalheUsuario(this.cookieService.get('id'),this.cookieService.get('token')).subscribe((response2: any) => {
-        console.log("2nd response", response2);
-        this.infoUsuario.id = response2._id
-        this.infoUsuario.usuario = response2.usuario
+      this.autorizacaoService.detalheUsuario(this.cookieService.get('id'),this.cookieService.get('token')).subscribe((response: any) => {
+        console.log("2nd response", response);
+        this.infoUsuario.id = response._id
+        this.infoUsuario.usuario = response.usuario
         this.infoUsuario.token = this.cookieService.get('token')
         console.log("cookie ID",this.cookieService.get('id'));
         console.log("cookie token",this.cookieService.get('token'));
       })
-
-      // this.token=!this.cookieService.get('token')
-      // if(this.token){
-      //   this.router.navigate(['/login'])
-      // }
 
     }
 
@@ -69,6 +64,12 @@ export class PerfilComponent implements OnInit{
         this.router.navigate(['/login'])
 
       }
+    }
+
+    deletar(){
+      this.autorizacaoService.deletarUsuario(this.infoUsuario.id,this.infoUsuario.token).subscribe((response: any) => {
+        this.logout();
+      });
     }
 
 

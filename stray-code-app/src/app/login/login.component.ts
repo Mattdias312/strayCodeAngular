@@ -73,10 +73,6 @@ export class LoginComponent implements OnInit{
     }
     console.log("cookie ID",this.cookieService.get('id'));
     console.log("cookie token",this.cookieService.get('token'));
-  // this.token=!this.cookieService.get('token')
-  // if(this.token){
-  //   this.router.navigate(['/perfil'])
-  // }
 
 }
 
@@ -149,20 +145,11 @@ export class LoginComponent implements OnInit{
             this.router.navigate(['/perfil'])
 
 
-          } else {
-
           }
 
           console.log("usuario logado", this.usuarioLogado);
 
           console.log("Response", response, token);
-          // this.autorizacaoService.detalheUsuario(response.id,response.token).subscribe((response2: any) => {
-          //     console.log("2nd response", response2);
-          //   this.infoUsuario.id = response2._id
-          //   this.infoUsuario.usuario = response2.usuario
-          //   console.log("cookie ID",this.cookieService.get('id'));
-          //   console.log("cookie token",this.cookieService.get('token'));
-          // })
       }, (_error) => {
             console.log("Falha no login");
             this.alert = true;
