@@ -16,14 +16,14 @@ import { Location } from '@angular/common';
     templateUrl: './perfil.component.html',
     styleUrl: './perfil.component.css'
   })
-  
-  
+
+
   @Injectable({
     providedIn: 'root'
   })
 
-  
-  
+
+
 
 export class PerfilComponent implements OnInit{
 
@@ -34,14 +34,15 @@ export class PerfilComponent implements OnInit{
         private location: Location
   ) {  }
 
-    infoUsuario={
+  infoUsuario={
         usuario:'',
         id:'',
         token:''
         }
   usuarioLogado: boolean = false;
+  token:boolean = true
 
-        
+
     ngOnInit(): void {
       this.autorizacaoService.detalheUsuario(this.cookieService.get('id'),this.cookieService.get('token')).subscribe((response2: any) => {
         console.log("2nd response", response2);
@@ -50,10 +51,13 @@ export class PerfilComponent implements OnInit{
         this.infoUsuario.token = this.cookieService.get('token')
         console.log("cookie ID",this.cookieService.get('id'));
         console.log("cookie token",this.cookieService.get('token'));
-          
-          
-        })
-        this.header.alteraHeader();
+      })
+
+      // this.token=!this.cookieService.get('token')
+      // if(this.token){
+      //   this.router.navigate(['/login'])
+      // }
+
     }
 
     logout(){
@@ -68,6 +72,6 @@ export class PerfilComponent implements OnInit{
     }
 
 
-    
+
 
 }

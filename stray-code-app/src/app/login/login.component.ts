@@ -73,7 +73,10 @@ export class LoginComponent implements OnInit{
     }
     console.log("cookie ID",this.cookieService.get('id'));
     console.log("cookie token",this.cookieService.get('token'));
-  this.token=!this.cookieService.get('token')
+  // this.token=!this.cookieService.get('token')
+  // if(this.token){
+  //   this.router.navigate(['/perfil'])
+  // }
 
 }
 
@@ -145,7 +148,7 @@ export class LoginComponent implements OnInit{
             console.log("Login bem-sucedido");
             this.router.navigate(['/perfil'])
 
-            
+
           } else {
 
           }
