@@ -14,7 +14,7 @@
         <mat-card-header>
             <h2>{{descricaoLogin()}}</h2>
         </mat-card-header>
-        @if (!autorizacaoService.statusLogin()) {
+        @if (this.token) {
             <form [formGroup]="usuarioForm" #tableForm="ngForm">
                 <div class="mb-3">
                     <label for="login" class="form-label">Login</label>

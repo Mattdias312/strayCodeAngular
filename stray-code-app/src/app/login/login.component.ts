@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { CategoryEditComponent } from '../category.edit/category.edit.component';
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
@@ -32,7 +33,9 @@ export class LoginComponent implements OnInit{
   constructor(public formBuilder: FormBuilder,
     public autorizacaoService:AutorizacaoService,
     private cookieService: CookieService,
-    private router: Router) {  }
+    private router: Router,
+    public header: HeaderComponent
+  ) {  }
 
   usuarios:LoginModel[] = [] as LoginModel[];
   novoUsuario:LoginModel = {} as LoginModel;
@@ -42,6 +45,7 @@ export class LoginComponent implements OnInit{
   alertText: String = '';
   usuarioExiste: boolean = false;
   usuarioLogado: boolean = false;
+  token:boolean = true
   usuario:LoginModel = {
     usuario: '',
     senha: ''
@@ -69,7 +73,9 @@ export class LoginComponent implements OnInit{
     }
     console.log("cookie ID",this.cookieService.get('id'));
     console.log("cookie token",this.cookieService.get('token'));
-  }
+  this.token=!this.cookieService.get('token')
+
+}
 
    async cadastrar(){
     this.alert=true
@@ -138,6 +144,7 @@ export class LoginComponent implements OnInit{
             localStorage.setItem("login", "SIM");
             console.log("Login bem-sucedido");
             this.router.navigate(['/perfil'])
+
             
           } else {
 
