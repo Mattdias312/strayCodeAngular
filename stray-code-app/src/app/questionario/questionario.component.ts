@@ -109,8 +109,6 @@ export class QuestionarioComponent {
       ramo: this.editableQuestionario != null ?  this.editableQuestionario.ramo : null,
       cnae: this.editableQuestionario != null ?  this.editableQuestionario.cnae : null,
     });
-
-    console.log('quetion', this.infoUsuario)
     this.popularTipoEmpresa();
     this.popularTodosRamoEmpresa();
     this.popularTodosCnae();
@@ -145,9 +143,6 @@ export class QuestionarioComponent {
   }
 
   cadastrar(){
-    console.log(this.questionarioForm.get('tipo')?.value)
-    console.log(this.questionarioForm.get('ramo')?.value)
-    console.log(this.questionarioForm.get('cnae')?.value)
     this.alert=true
     if(this.questionarioForm.get('tipo')?.value == null){
       this.alertType = 'danger'
@@ -177,13 +172,9 @@ export class QuestionarioComponent {
 
   getQuestionario(){
     this.questionarioService.detelheQuestionario(this.infoUsuario.id, this.infoUsuario.token).subscribe((response: any) => {
-      console.log(response)
       this.questionarioForm.controls['tipo'].setValue(response.tipoEmpresa)
       this.questionarioForm.controls['ramo'].setValue(response.ramoEmpresa)
       this.questionarioForm.controls['cnae'].setValue(response.cnae)
     })
-    console.log(this.questionarioForm.get('tipo')?.value)
-    console.log(this.questionarioForm.get('ramo')?.value)
-    console.log(this.questionarioForm.get('cnae')?.value)
   }
 }

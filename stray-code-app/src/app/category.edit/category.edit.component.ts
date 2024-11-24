@@ -38,7 +38,6 @@ export class CategoryEditComponent implements OnInit {
     if($event){
       this.dialoRef.close();
     }
-    console.log("close modal windows");
   }
 
 }

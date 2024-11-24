@@ -61,30 +61,23 @@ export class CategoryComponent {
           if (this.blnEdit && this.dataSource.map(p => p.position).includes(resp.position)) {
               this.dataSource[resp.position -1] = resp;
               this.tableRef.renderRows();
-              console.log('Elemento EDITADO!');
           }
           else {
 
             const positionExists = this.dataSource.map(p => p.position).includes(resp.position)
 
-            console.log(positionExists);
-
             if (! this.blnEdit && resp.position > 0) {
               //this.cdr.detectChanges();
               this.dataSource.push(resp);
               this.tableRef.renderRows();
-              console.log('Elemento Incluido!');
             }
           }
 
           // Se os dados foram retornados do modal, atualize o dataSource
-          console.log(tableResp.position)
-          console.log(tableResp.name)
-          console.log(tableResp.weight)
-          console.log(tableResp.symbol)
+
 
         } else {
-          console.log('Elemento não EDITADO!');
+
         }
       });
   }
@@ -93,41 +86,7 @@ export class CategoryComponent {
   public editElement(inputCategory: Category | null): void  {
       this.blnEdit = true;
       this.openDialog(inputCategory);
-    /*
-      const dialogRef = this.dialog.open(CategoryEditComponent, {
-        disableClose: true,
-        data: {editableCategory: inputCategory, actionName: this.blnEdit ? 'Editar' : 'Criar'}
-      });
 
-      dialogRef.afterClosed().subscribe(resp => {
-        if (resp !== undefined) {
-          if (this.dataSource.map(p => p.position).includes(resp.position)) {
-              this.dataSource[resp.position -1] = resp;
-              this.tableRef.renderRows();
-              console.log('Elemento EDITADO!');
-          }
-          else {
-            if (this.blnEdit) {
-              this.cdr.detectChanges();
-              this.dataSource.push(resp);
-              this.tableRef.renderRows();
-              console.log('Elemento Incluido!');
-            }
-          }
-
-          // Se os dados foram retornados do modal, atualize o dataSource
-          const tableResp : Category = resp;
-
-          console.log(tableResp.name)
-          console.log(tableResp.position)
-          console.log(tableResp.weight)
-          console.log(tableResp.symbol)
-
-        } else {
-          console.log('Elemento não EDITADO!');
-        }
-      });
-      */
   }
 
   public deleteElement(deleteCategory: Category | null): void  {
@@ -136,37 +95,16 @@ export class CategoryComponent {
             leftButtonLabel: 'Sim', rightButtonLabel: 'Não'}}).afterClosed().subscribe(
       resp => {
       if(resp){
-        console.log('Elemento não apagado !');
       } else {
         this.dataSource = this.dataSource.filter(p => p.position !== deleteCategory?.position);
-        console.log('Elemento apagado !');
       }
 
     })
   }
 
   public createElement(inputCategory: Category | null) {
-    console.log("create element")
     this.blnEdit = false;
 
     this.openDialog(inputCategory);
-
-    /*
-    this.dialog.open(CategoryEditComponent, {disableClose: true,
-      data: {editableCategory: inputCategory, actionName: 'Incluir'}}).afterClosed().subscribe(
-      resp => {
-      if(resp){
-        console.log('Elemento incluido !');
-        this.cdr.detectChanges();
-
-        this.dataSource.push(resp);
-
-        this.tableRef.renderRows();
-      } else {
-        console.log('Elemento Cancelado !');
-      }
-    }
-   )
-  */
   }
 }

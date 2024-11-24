@@ -48,11 +48,6 @@ export class AutorizacaoService {
         'Content-Type': 'application/json',
         'x-access-token': token
       });
-      console.log(`${loginURI}/user/${id}`)
-      console.log('Headers enviados:', headers);
-      console.log('Headers enviados (chaves):', headers.keys());
-      console.log('Content-Type:', headers.get('Content-Type'));
-      console.log('x-access-token:', headers.get('x-access-token'));
       try {
         return this.http.get<any>(`${loginURI}/user/${id}`, { headers });
     }catch (error) {
@@ -72,7 +67,6 @@ export class AutorizacaoService {
         'Content-Type': 'application/json',
         'x-access-token': token
       });
-      console.log("delete", `${loginURI}/user/${id}`)
       try {
         return this.http.delete<any>(`${loginURI}/user/${id}`, { headers });
       } catch (error) {

@@ -22,14 +22,11 @@ export class QuestionarioService {
   }
 
   detelheQuestionario(id:string, token:string){
-    console.log("detelhe Questionario",id)
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'x-access-token': token
     });
     try{
-      console.log(`${questionarioURI}/${id}`)
       return this.http.get<any>(`${questionarioURI}/${id}`, {headers});
 
     }catch(err){

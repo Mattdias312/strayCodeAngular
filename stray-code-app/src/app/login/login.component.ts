@@ -71,8 +71,7 @@ export class LoginComponent implements OnInit{
       usuario: '',
       senha: ''
     }
-    console.log("cookie ID",this.cookieService.get('id'));
-    console.log("cookie token",this.cookieService.get('token'));
+
 
 }
 
@@ -115,10 +114,8 @@ export class LoginComponent implements OnInit{
 
     try {
       const resultado = await this.autorizacaoService.cadastrar(this.usuario).toPromise();
-      console.log("Resultado da API:", !resultado);
       return !resultado; // Retorna o boolean recebido da API
     } catch (error) {
-      console.error("Erro ao verificar usuário:", error);
       return false;
     }
   }
@@ -129,7 +126,6 @@ export class LoginComponent implements OnInit{
     this.usuario.senha = this.usuarioForm.get('senha')?.value;
 
     if (!this.autorizacaoService.statusLogin()) {
-      console.log("Iniciando login...");
       try {
         this.autorizacaoService.autorizar(this.usuario).subscribe(async (response) => {
           const token = response.token;
@@ -141,17 +137,10 @@ export class LoginComponent implements OnInit{
             this.cookieService.set('token',response.token,1/24)
             this.infoUsuario.token = token;
             localStorage.setItem("login", "SIM");
-            console.log("Login bem-sucedido");
             this.router.navigate(['/perfil'])
-
-
           }
 
-          console.log("usuario logado", this.usuarioLogado);
-
-          console.log("Response", response, token);
       }, (_error) => {
-            console.log("Falha no login");
             this.alert = true;
             this.alertType = 'danger';
             this.alertText = 'Usuário e/ou senha incorreto';
@@ -166,7 +155,6 @@ export class LoginComponent implements OnInit{
         setTimeout(() => (this.alert = false), this.timeout);
       }
     } else {
-      console.log("Usuário já está logado.");
       this.usuarioLogado = true;
     }
 

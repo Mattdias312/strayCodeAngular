@@ -45,12 +45,9 @@ export class PerfilComponent implements OnInit{
 
     ngOnInit(): void {
       this.autorizacaoService.detalheUsuario(this.cookieService.get('id'),this.cookieService.get('token')).subscribe((response: any) => {
-        console.log("2nd response", response);
         this.infoUsuario.id = response._id
         this.infoUsuario.usuario = response.usuario
         this.infoUsuario.token = this.cookieService.get('token')
-        console.log("cookie ID",this.cookieService.get('id'));
-        console.log("cookie token",this.cookieService.get('token'));
       })
 
     }
