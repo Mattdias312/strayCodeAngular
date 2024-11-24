@@ -1,3 +1,5 @@
+import { CookieService } from 'ngx-cookie-service';
+import { QuestionarioService } from './../_service/questionario-service.component';
 import { Component, Input } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -77,7 +79,10 @@ export class QuestionarioComponent {
 
   @Input() public editableQuestionario!: QuestionarioModel;
 
-  constructor(public formBuilder: FormBuilder){}
+  constructor(public formBuilder: FormBuilder,
+    public questionarioService: QuestionarioService,
+    private cookieService: CookieService
+  ){}
 
   tipoEmpresa = TIPO_EMPRESA
   ramoEmpresa = RAMO_EMPRESA
@@ -91,17 +96,36 @@ export class QuestionarioComponent {
   alertType: String = '';
   alertText: String = '';
 
+  infoUsuario={
+    id:'',
+    token:''
+  }
+
   ngOnInit(){
+    this.infoUsuario.id = this.cookieService.get('id');
+    this.infoUsuario.token = this.cookieService.get('token');
     this.questionarioForm = this.formBuilder.group({
       tipo: this.editableQuestionario != null ? this.editableQuestionario.tipo :null,
       ramo: this.editableQuestionario != null ?  this.editableQuestionario.ramo : null,
       cnae: this.editableQuestionario != null ?  this.editableQuestionario.cnae : null,
     });
+
+    console.log('quetion', this.infoUsuario)
     this.popularTipoEmpresa();
+    this.popularTodosRamoEmpresa();
+    this.popularTodosCnae();
+    this.getQuestionario();
+
   }
 
   popularTipoEmpresa(){
     this.tipoEmpresaFiltrado = this.tipoEmpresa;
+  }
+  popularTodosRamoEmpresa(){
+    this.ramoEmpresaFiltrado = this.ramoEmpresa;
+  }
+  popularTodosCnae(){
+    this.cnaeFiltrado = this.cnae;
   }
 
   popularRamoEmpresa(event: Event){
@@ -149,5 +173,17 @@ export class QuestionarioComponent {
       this.cnaeFiltrado = [];
       setTimeout(() => {this.popularTipoEmpresa()}, 200);
     }
+  }
+
+  getQuestionario(){
+    this.questionarioService.detelheQuestionario(this.infoUsuario.id, this.infoUsuario.token).subscribe((response: any) => {
+      console.log(response)
+      this.questionarioForm.controls['tipo'].setValue(response.tipoEmpresa)
+      this.questionarioForm.controls['ramo'].setValue(response.ramoEmpresa)
+      this.questionarioForm.controls['cnae'].setValue(response.cnae)
+    })
+    console.log(this.questionarioForm.get('tipo')?.value)
+    console.log(this.questionarioForm.get('ramo')?.value)
+    console.log(this.questionarioForm.get('cnae')?.value)
   }
 }

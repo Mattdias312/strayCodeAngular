@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { MaterialModule } from '../material.module';
-import { AutorizacaoService } from '../_service/service.component';
+import { AutorizacaoService } from '../_service/user-service.component';
 import { LoginModel } from './login-model.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';

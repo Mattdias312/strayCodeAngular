@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { AutorizacaoService } from '../_service/service.component';
+import { AutorizacaoService } from '../_service/user-service.component';
 import { CookieService } from 'ngx-cookie-service';
 
 

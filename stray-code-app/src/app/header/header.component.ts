@@ -3,7 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { MaterialModule } from '../material.module';
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
-import { AutorizacaoService } from '../_service/service.component';
+import { AutorizacaoService } from '../_service/user-service.component';
 import { CookieService } from "ngx-cookie-service";
 
 @Component({

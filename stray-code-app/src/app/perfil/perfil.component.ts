@@ -3,7 +3,7 @@ import { MaterialModule } from "../material.module";
 import { FormBuilder } from "@angular/forms";
 import { response } from "express";
 import { CookieService } from "ngx-cookie-service";
-import { AutorizacaoService } from "../_service/service.component";
+import { AutorizacaoService } from "../_service/user-service.component";
 import { Router } from '@angular/router';
 import { HeaderComponent } from "../header/header.component";
 import { Location } from '@angular/common';
