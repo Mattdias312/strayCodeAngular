@@ -11,6 +11,7 @@ exports.getquestionario = async function (req, res){
 };
 
 exports.create = function (req, res){
+    console.log('create', req.body)
 
     let questionario = new Questionario(
         {
@@ -44,6 +45,7 @@ exports.details = async function (req, res) {
 
 
 exports.updatequestionario = async function (req, res) {
+    console.log('updating question')
     try {
         const updatedquestionario = await Questionario.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedquestionario) {

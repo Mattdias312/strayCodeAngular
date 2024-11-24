@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const authenticateJWT = (req, res, next) => {
+  console.log('authenticate');
   const token = req.headers['x-access-token']; // Extrai o token do header Authorization
 
   if (!token) {

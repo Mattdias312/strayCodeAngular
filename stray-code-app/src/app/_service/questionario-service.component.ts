@@ -34,4 +34,32 @@ export class QuestionarioService {
     }
   }
 
+  cadastrar(token:string, infoQuestionario:any){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-access-token': token
+    });
+    try{
+      console.log(`${questionarioURI}`)
+      return this.http.post<any>(`${questionarioURI}`, infoQuestionario, {headers});
+
+    }catch(err){
+      return of(false);
+    }
+  }
+
+  editar(id:string, token:string, infoQuestionario:any){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-access-token': token
+    });
+    try{
+      console.log(`${questionarioURI}/${id}`)
+      return this.http.put<any>(`${questionarioURI}/${id}`, infoQuestionario, {headers});
+
+    }catch(err){
+      return of(false);
+    }
+  }
+
 }

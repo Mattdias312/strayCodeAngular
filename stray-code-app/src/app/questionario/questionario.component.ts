@@ -100,10 +100,18 @@ export class QuestionarioComponent {
     id:'',
     token:''
   }
+  infoQuestionario={
+    usuario: this.infoUsuario.id,
+    tipoEmpresa: '',
+    ramoEmpresa: '',
+    cnae: '',
+  }
+  idQuetionario:string = ''
 
   ngOnInit(){
     this.infoUsuario.id = this.cookieService.get('id');
     this.infoUsuario.token = this.cookieService.get('token');
+    this.cookieService.set('idQuest', '')
     this.questionarioForm = this.formBuilder.group({
       tipo: this.editableQuestionario != null ? this.editableQuestionario.tipo :null,
       ramo: this.editableQuestionario != null ?  this.editableQuestionario.ramo : null,
@@ -160,6 +168,24 @@ export class QuestionarioComponent {
       this.alertType = 'success'
       this.alertText = 'Questionário Salvo com sucesso'
       setTimeout(() => this.alert=false, 4000)
+
+      this.infoQuestionario.tipoEmpresa = this.questionarioForm.get('tipo')?.value
+      this.infoQuestionario.ramoEmpresa = this.questionarioForm.get('ramo')?.value
+      this.infoQuestionario.cnae = this.questionarioForm.get('cnae')?.value
+      this.infoQuestionario.usuario = this.infoUsuario.id
+      console.log(this.idQuetionario)
+      if(this.idQuetionario == ''){
+        console.log(this.infoQuestionario)
+        console.log(this.infoUsuario.token)
+        console.log(this.infoUsuario.id)
+        this.questionarioService.cadastrar(this.infoUsuario.token, this.infoQuestionario)
+      }else{
+        console.log(this.infoUsuario.token)
+        this.questionarioService.editar(this.idQuetionario, this.infoUsuario.token,this.infoQuestionario)
+      }
+
+
+
       this.questionarioForm.controls['tipo'].setValue(null)
       this.questionarioForm.controls['ramo'].setValue(null)
       this.questionarioForm.controls['cnae'].setValue(null)
@@ -170,11 +196,17 @@ export class QuestionarioComponent {
     }
   }
 
-  getQuestionario(){
-    this.questionarioService.detelheQuestionario(this.infoUsuario.id, this.infoUsuario.token).subscribe((response: any) => {
+  async getQuestionario(){
+   await this.questionarioService.detelheQuestionario(this.infoUsuario.id, this.infoUsuario.token).subscribe((response: any) => {
       this.questionarioForm.controls['tipo'].setValue(response.tipoEmpresa)
       this.questionarioForm.controls['ramo'].setValue(response.ramoEmpresa)
       this.questionarioForm.controls['cnae'].setValue(response.cnae)
+      this.cookieService.set('idQuest',response._id)
+      console.log('response',response)
+      this.idQuetionario = this.cookieService.get('idQuest')
+      console.log("ID",this.idQuetionario)
     })
   }
+
+
 }
