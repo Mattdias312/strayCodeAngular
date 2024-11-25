@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit{
   alertText: String = '';
   usuarioExiste: boolean = false;
   usuarioLogado: boolean = false;
+  showPassword = false;
   token:boolean = true
   usuario:LoginModel = {
     usuario: '',
@@ -107,6 +108,10 @@ export class LoginComponent implements OnInit{
       }
     }
    }
+
+   AlternarVisibilidade() {
+    this.showPassword = !this.showPassword;
+  }
 
   async verificaSeUsuarioExiste(): Promise<boolean> {
     this.usuario.usuario = this.usuarioForm.get('usuario')?.value;

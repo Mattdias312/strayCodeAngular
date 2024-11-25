@@ -42,6 +42,10 @@ export class PerfilComponent implements OnInit{
   usuarioLogado: boolean = false;
   token:boolean = true
 
+  showPassword = false;
+  showPasswordConfirmar = false;
+
+
 
     ngOnInit(): void {
       this.autorizacaoService.detalheUsuario(this.cookieService.get('id'),this.cookieService.get('token')).subscribe((response: any) => {
@@ -50,6 +54,14 @@ export class PerfilComponent implements OnInit{
         this.infoUsuario.token = this.cookieService.get('token')
       })
 
+    }
+
+    AlternarVisibilidade() {
+      this.showPassword = !this.showPassword;
+    }
+
+    AlternarVisibilidadeConfirmar() {
+      this.showPasswordConfirmar = !this.showPasswordConfirmar;
     }
 
     logout(){

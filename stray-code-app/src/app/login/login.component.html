@@ -16,21 +16,27 @@
         </mat-card-header>
         @if (this.token) {
             <form [formGroup]="usuarioForm" #tableForm="ngForm">
-                <div class="mb-3">
+                <div class="col-md-2">
                     <label for="login" class="form-label">Login</label>
                     <input type="text" formControlName = "usuario" class="form-control" name="login" id="login" placeholder="login">
                 </div>
-                <div class="mb-3">
-                    <label for="senha" class="form-label">Senha</label>
-                    <input type="password" formControlName = "senha" class="form-control" name="senha" id="senha" placeholder="senha">
+                <div class="password-container col-md-2">
+                  <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Digite sua senha"
+                    class="form-control"
+                    formControlName = "senha"
+                    name="senha"
+                    id="senha" />
+                  <i
+                    class="toggle-icon"
+                    (click)="AlternarVisibilidade()">
+                    <mat-icon>
+                      {{ showPassword ? 'visibility' : 'visibility_off' }}
+                    </mat-icon>
+                  </i>
                 </div>
             </form>
-        }@else {
-          <div>
-            <label for="">id {{infoUsuario.id}}</label>
-            <label for="">token {{infoUsuario.token}}</label>
-            <label for="">usuario {{infoUsuario.usuario}}</label>
-          </div>
         }
         <div class="flx-center-row flx-evly">
               @if (!autorizacaoService.statusLogin()) {
