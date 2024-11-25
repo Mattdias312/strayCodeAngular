@@ -97,6 +97,8 @@ export class QuestionarioComponent {
   alert:boolean = false;
   alertType: String = '';
   alertText: String = '';
+  edit:boolean = false;
+  toggleEdit:boolean = true;
 
   infoUsuario={
     id:'',
@@ -119,9 +121,6 @@ export class QuestionarioComponent {
       ramo: this.editableQuestionario != null ?  this.editableQuestionario.ramo : null,
       cnae: this.editableQuestionario != null ?  this.editableQuestionario.cnae : null,
     });
-    this.popularTipoEmpresa();
-    this.popularTodosRamoEmpresa();
-    this.popularTodosCnae();
     this.getQuestionario();
 
   }
@@ -152,7 +151,7 @@ export class QuestionarioComponent {
     }
   }
 
-  cadastrar(){
+  async cadastrar(){
     this.alert=true
     if(this.questionarioForm.get('tipo')?.value == null){
       this.alertType = 'danger'
@@ -178,29 +177,56 @@ export class QuestionarioComponent {
       if(this.idQuetionario == ''){
         this.questionarioService.cadastrar(this.infoUsuario.token, this.infoQuestionario).toPromise();
       }else{
-        this.autorizacaoService.atualizarQuest(this.idQuetionario, this.infoUsuario.token,this.infoQuestionario).toPromise();
+        this.questionarioService.editar(this.idQuetionario, this.infoUsuario.token,this.infoQuestionario).toPromise();
       }
 
       this.questionarioForm.controls['tipo'].setValue(null)
       this.questionarioForm.controls['ramo'].setValue(null)
       this.questionarioForm.controls['cnae'].setValue(null)
-      this.tipoEmpresaFiltrado = [];
       this.ramoEmpresaFiltrado = [];
       this.cnaeFiltrado = [];
       setTimeout(() => {this.popularTipoEmpresa()}, 200);
+      await this.getQuestionario();
     }
   }
 
   async getQuestionario(){
+    this.popularTipoEmpresa();
+    this.popularTodosRamoEmpresa();
+    this.popularTodosCnae();
    await this.questionarioService.detelheQuestionario(this.infoUsuario.id, this.infoUsuario.token).subscribe((response: any) => {
       this.questionarioForm.controls['tipo'].setValue(response.tipoEmpresa)
       this.questionarioForm.controls['ramo'].setValue(response.ramoEmpresa)
       this.questionarioForm.controls['cnae'].setValue(response.cnae)
       this.cookieService.set('idQuest',response._id)
-      console.log('response',response)
       this.idQuetionario = this.cookieService.get('idQuest')
-      console.log("ID",this.idQuetionario)
+      console.log(this.idQuetionario)
+      if(this.idQuetionario ==''){
+        this.edit=false;
+        this.questionarioForm.controls['tipo'].enable()
+        this.questionarioForm.controls['ramo'].enable()
+        this.questionarioForm.controls['cnae'].enable()
+      }else{
+        this.edit=true
+        this.questionarioForm.controls['tipo'].disable()
+        this.questionarioForm.controls['ramo'].disable()
+        this.questionarioForm.controls['cnae'].disable()
+        this.toggleEdit = true
+      }
     })
+  }
+
+  editar(){
+    this.questionarioForm.controls['tipo'].setValue(null)
+    this.questionarioForm.controls['ramo'].setValue(null)
+    this.questionarioForm.controls['cnae'].setValue(null)
+    this.ramoEmpresaFiltrado = [];
+    this.cnaeFiltrado = [];
+    this.questionarioForm.controls['tipo'].enable()
+    this.questionarioForm.controls['ramo'].enable()
+    this.questionarioForm.controls['cnae'].enable()
+    this.edit=false;
+    this.toggleEdit = false
   }
 
 

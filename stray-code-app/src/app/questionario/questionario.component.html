@@ -40,8 +40,13 @@
     </form>
   </div>
 
-    <div class="container-fluid d-flex justify-content-end">
-      <mat-card-actions class="botaoQuestionario flx-center-row">
-        <button mat-raised-button color="primary" (click)="cadastrar()">Cadastrar Resposta</button>
+    <div class="container-fluid">
+      <mat-card-actions class="botaoQuestionario d-flex justify-content-evenly align-items-center">
+        @if(toggleEdit){
+          <button mat-raised-button color="primary" (click)="editar()" [disabled]="!edit">Editar</button>
+        } @else {
+          <button mat-raised-button color="warn" (click)="getQuestionario()">cancelar</button>
+        }
+        <button mat-raised-button color="primary" (click)="cadastrar()" [disabled]="edit">Cadastrar Resposta</button>
       </mat-card-actions>
     </div>
