@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MaterialModule } from '../material.module';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuestionarioModel } from '../_models/questionario-model';
+import { AutorizacaoService } from '../_service/user-service.component';
 
 export interface TipoEmpresa {
   id: number;
@@ -81,7 +82,8 @@ export class QuestionarioComponent {
 
   constructor(public formBuilder: FormBuilder,
     public questionarioService: QuestionarioService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    public autorizacaoService:AutorizacaoService,
   ){}
 
   tipoEmpresa = TIPO_EMPRESA
@@ -178,10 +180,24 @@ export class QuestionarioComponent {
         console.log(this.infoQuestionario)
         console.log(this.infoUsuario.token)
         console.log(this.infoUsuario.id)
-        this.questionarioService.cadastrar(this.infoUsuario.token, this.infoQuestionario)
+        this.questionarioService.cadastrar(this.infoUsuario.token, this.infoQuestionario).subscribe({
+          next: (response) => {
+            console.log('Resposta do servidor:', response);
+          },
+          error: (err) => {
+            console.error('Erro na requisição:', err);
+          }
+        });
       }else{
         console.log(this.infoUsuario.token)
-        this.questionarioService.editar(this.idQuetionario, this.infoUsuario.token,this.infoQuestionario)
+        this.autorizacaoService.atualizarQuest(this.idQuetionario, this.infoUsuario.token,this.infoQuestionario).subscribe({
+          next: (response) => {
+            console.log('Resposta do servidor:', response);
+          },
+          error: (err) => {
+            console.error('Erro na requisição:', err);
+          }
+        });
       }
 
 

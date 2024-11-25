@@ -13,6 +13,7 @@ const authenticateJWT = (req, res, next) => {
     req.user = decoded; // Adiciona as informações do usuário ao request
     next();
   } catch (error) {
+    console.log('Token inválido ou expirado.',error);
     res.status(401).json({ message: 'Token inválido ou expirado.' });
   }
 };

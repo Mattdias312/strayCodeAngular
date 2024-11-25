@@ -6,6 +6,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 import { response } from 'express';
 
 const loginURI:string = "http://localhost:3000"
+const questionarioURI: string = "http://localhost:3000/questionario"
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +97,24 @@ export class AutorizacaoService {
     }
   }
 
+  atualizarQuest(id: string, token: string, infoQuestionario: any){
+    if(this.isBrowser){
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+
+      try {
+        return this.http.put<any>(`${questionarioURI}/${id}`, infoQuestionario, { headers });
+      } catch (error) {
+        console.error('Erro inesperado no método atualizarSenha:', error);
+        return of(false);
+      }
+    } else {
+      return of(false);
+    }
+  }
+
 
 
   deslogar() {
@@ -111,4 +130,5 @@ export class AutorizacaoService {
     }
     return false;
   }
+
 }
