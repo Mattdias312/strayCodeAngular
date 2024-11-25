@@ -1,12 +1,12 @@
-import { Component, Injectable, OnInit } from "@angular/core";
+import { Component, Injectable, Input, OnInit } from "@angular/core";
 import { MaterialModule } from "../material.module";
-import { FormBuilder } from "@angular/forms";
-import { response } from "express";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { CookieService } from "ngx-cookie-service";
 import { AutorizacaoService } from "../_service/user-service.component";
 import { Router } from '@angular/router';
 import { HeaderComponent } from "../header/header.component";
-import { Location } from '@angular/common';
+import { RedefinirModel } from "../login/redefinir-senha-model.component";
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -31,9 +31,12 @@ export class PerfilComponent implements OnInit{
         private cookieService: CookieService,
         private router: Router,
         public header: HeaderComponent,
-        private location: Location
+        public formBuilder: FormBuilder
   ) {  }
 
+  @Input() public editableSenha!: RedefinirModel;
+
+  public senhaForm!: FormGroup;
   infoUsuario={
         usuario:'',
         id:'',
@@ -42,8 +45,11 @@ export class PerfilComponent implements OnInit{
   usuarioLogado: boolean = false;
   token:boolean = true
 
-  showPassword = false;
-  showPasswordConfirmar = false;
+  password:string = '';
+  confirmPassword:string = '';
+  showPassword:boolean = false;
+  showPasswordConfirmar:boolean = false;
+  showResetPassword:boolean = false;
 
 
 
@@ -62,6 +68,30 @@ export class PerfilComponent implements OnInit{
 
     AlternarVisibilidadeConfirmar() {
       this.showPasswordConfirmar = !this.showPasswordConfirmar;
+    }
+
+    showRedefinir(){
+      this.senhaForm = this.formBuilder.group({
+        senha: this.editableSenha != null ? this.editableSenha.senha : '',
+        senhaConfirm: this.editableSenha != null ?  this.editableSenha.senhaConfirm : '',
+      });
+      this.showResetPassword = !this.showResetPassword
+    }
+
+    passwordsMatch(){
+      return this.password === this.confirmPassword && this.password.length > 0;
+    }
+
+    alterarSenha(){
+      if(this.passwordsMatch()){
+        console.log('alterarSenha',this.infoUsuario.id,this.infoUsuario.token, this.password)
+        this.autorizacaoService.atualizarSenha(this.infoUsuario.id,this.infoUsuario.token, this.password).subscribe((response: any) => {
+          this.showResetPassword = false;
+          this.password = '';
+          this.confirmPassword = '';
+          this.senhaForm.reset();
+        });
+      }
     }
 
     logout(){

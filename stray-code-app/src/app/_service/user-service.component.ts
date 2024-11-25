@@ -78,6 +78,24 @@ export class AutorizacaoService {
     }
   }
 
+  atualizarSenha(id: string, token: string, senha: string){
+    if(this.isBrowser){
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      });
+      const body = { senha };
+      try {
+        return this.http.put<any>(`${loginURI}/user/${id}`, body, { headers });
+      } catch (error) {
+        console.error('Erro inesperado no método atualizarSenha:', error);
+        return of(false);
+      }
+    } else {
+      return of(false);
+    }
+  }
+
 
 
   deslogar() {

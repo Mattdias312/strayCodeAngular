@@ -1,44 +1,58 @@
 <mat-card-content>
   <div class="col-md-2">
     <label for="">Usuário</label>
-    <input type="text" class="form-control" [value]="infoUsuario.usuario" size="200" disabled>
+    <input type="text" class="form-control" [value]="infoUsuario.usuario" disabled>
+
+  </div>
+  @if (showResetPassword){
 
     <h3>Redefinir Senha</h3>
-  </div>
+    <div class="password-container col-md-2">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        placeholder="Digite sua senha"
+        class="form-control"
+        [(ngModel)]="password" />
+      <i
+        class="toggle-icon"
+        (click)="AlternarVisibilidade()"
+        >
+        <mat-icon>
+          {{ showPassword ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+      </i>
+    </div>
+    <div class="password-container col-md-2">
+      <input
+        [type]="showPasswordConfirmar ? 'text' : 'password'"
+        placeholder="Digite sua senha"
+        class="form-control"
+        [(ngModel)]="confirmPassword" />
+      <i
+        class="toggle-icon"
+        (click)="AlternarVisibilidadeConfirmar()">
+        <mat-icon>
+          {{ showPasswordConfirmar ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+      </i>
+    </div>
 
-  <div class="password-container col-md-2">
-    <input
-      [type]="showPassword ? 'text' : 'password'"
-      placeholder="Digite sua senha"
-      class="form-control" />
-    <i
-      class="toggle-icon"
-      (click)="AlternarVisibilidade()">
-      <mat-icon>
-        {{ showPassword ? 'visibility' : 'visibility_off' }}
-      </mat-icon>
-    </i>
-  </div>
-  <div class="password-container col-md-2">
-    <input
-      [type]="showPasswordConfirmar ? 'text' : 'password'"
-      placeholder="Digite sua senha"
-      class="form-control" />
-    <i
-      class="toggle-icon"
-      (click)="AlternarVisibilidadeConfirmar()">
-      <mat-icon>
-        {{ showPasswordConfirmar ? 'visibility' : 'visibility_off' }}
-      </mat-icon>
-    </i>
-  </div>
+    <p [ngStyle]="{ color: passwordsMatch() ? 'green' : 'red' }">
+      {{ passwordsMatch() ? 'As senhas coincidem' : 'As senhas não coincidem' }}
+    </p>
+  }
   </mat-card-content>
 
 
 
   <mat-card-actions class="d-flex justify-content-evenly align-items-center">
-    <button mat-raised-button color="warn" (click)="deletar()">Deletar</button>
-    <button mat-raised-button color="primary" >Redefinir Senha</button>
-    <button mat-raised-button color="primary" (click)="logout()">Sair</button>
+    @if (!showResetPassword){
+      <button mat-raised-button color="warn" (click)="deletar()">Deletar</button>
+      <button mat-raised-button color="primary" (click)="showRedefinir()" >Redefinir Senha</button>
+      <button mat-raised-button color="primary" (click)="logout()">Sair</button>
+    } @else {
+      <button mat-raised-button color="warn" (click)="showRedefinir()" >Cancelar</button>
+      <button mat-raised-button color="primary" (click)="alterarSenha()" >Alterar</button>
+    }
   </mat-card-actions>
 
