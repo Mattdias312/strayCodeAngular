@@ -1,3 +1,5 @@
+import { CookieService } from 'ngx-cookie-service';
+import { QuestionarioService } from './../_service/questionario-service.component';
 import { Component, Input } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -5,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MaterialModule } from '../material.module';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuestionarioModel } from '../_models/questionario-model';
+import { AutorizacaoService } from '../_service/user-service.component';
 
 export interface TipoEmpresa {
   id: number;
@@ -77,7 +80,11 @@ export class QuestionarioComponent {
 
   @Input() public editableQuestionario!: QuestionarioModel;
 
-  constructor(public formBuilder: FormBuilder){}
+  constructor(public formBuilder: FormBuilder,
+    public questionarioService: QuestionarioService,
+    private cookieService: CookieService,
+    public autorizacaoService:AutorizacaoService,
+  ){}
 
   tipoEmpresa = TIPO_EMPRESA
   ramoEmpresa = RAMO_EMPRESA
@@ -91,17 +98,42 @@ export class QuestionarioComponent {
   alertType: String = '';
   alertText: String = '';
 
+  infoUsuario={
+    id:'',
+    token:''
+  }
+  infoQuestionario={
+    usuario: this.infoUsuario.id,
+    tipoEmpresa: '',
+    ramoEmpresa: '',
+    cnae: '',
+  }
+  idQuetionario:string = ''
+
   ngOnInit(){
+    this.infoUsuario.id = this.cookieService.get('id');
+    this.infoUsuario.token = this.cookieService.get('token');
+    this.cookieService.set('idQuest', '')
     this.questionarioForm = this.formBuilder.group({
       tipo: this.editableQuestionario != null ? this.editableQuestionario.tipo :null,
       ramo: this.editableQuestionario != null ?  this.editableQuestionario.ramo : null,
       cnae: this.editableQuestionario != null ?  this.editableQuestionario.cnae : null,
     });
     this.popularTipoEmpresa();
+    this.popularTodosRamoEmpresa();
+    this.popularTodosCnae();
+    this.getQuestionario();
+
   }
 
   popularTipoEmpresa(){
     this.tipoEmpresaFiltrado = this.tipoEmpresa;
+  }
+  popularTodosRamoEmpresa(){
+    this.ramoEmpresaFiltrado = this.ramoEmpresa;
+  }
+  popularTodosCnae(){
+    this.cnaeFiltrado = this.cnae;
   }
 
   popularRamoEmpresa(event: Event){
@@ -121,9 +153,6 @@ export class QuestionarioComponent {
   }
 
   cadastrar(){
-    console.log(this.questionarioForm.get('tipo')?.value)
-    console.log(this.questionarioForm.get('ramo')?.value)
-    console.log(this.questionarioForm.get('cnae')?.value)
     this.alert=true
     if(this.questionarioForm.get('tipo')?.value == null){
       this.alertType = 'danger'
@@ -141,6 +170,17 @@ export class QuestionarioComponent {
       this.alertType = 'success'
       this.alertText = 'Questionário Salvo com sucesso'
       setTimeout(() => this.alert=false, 4000)
+
+      this.infoQuestionario.tipoEmpresa = this.questionarioForm.get('tipo')?.value
+      this.infoQuestionario.ramoEmpresa = this.questionarioForm.get('ramo')?.value
+      this.infoQuestionario.cnae = this.questionarioForm.get('cnae')?.value
+      this.infoQuestionario.usuario = this.infoUsuario.id
+      if(this.idQuetionario == ''){
+        this.questionarioService.cadastrar(this.infoUsuario.token, this.infoQuestionario).toPromise();
+      }else{
+        this.autorizacaoService.atualizarQuest(this.idQuetionario, this.infoUsuario.token,this.infoQuestionario).toPromise();
+      }
+
       this.questionarioForm.controls['tipo'].setValue(null)
       this.questionarioForm.controls['ramo'].setValue(null)
       this.questionarioForm.controls['cnae'].setValue(null)
@@ -150,4 +190,18 @@ export class QuestionarioComponent {
       setTimeout(() => {this.popularTipoEmpresa()}, 200);
     }
   }
+
+  async getQuestionario(){
+   await this.questionarioService.detelheQuestionario(this.infoUsuario.id, this.infoUsuario.token).subscribe((response: any) => {
+      this.questionarioForm.controls['tipo'].setValue(response.tipoEmpresa)
+      this.questionarioForm.controls['ramo'].setValue(response.ramoEmpresa)
+      this.questionarioForm.controls['cnae'].setValue(response.cnae)
+      this.cookieService.set('idQuest',response._id)
+      console.log('response',response)
+      this.idQuetionario = this.cookieService.get('idQuest')
+      console.log("ID",this.idQuetionario)
+    })
+  }
+
+
 }

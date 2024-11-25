@@ -58,30 +58,21 @@ export class PeriodicaComponent {
         if (this.blnEdit && this.dataSource.map(p => p.position).includes(resp.position)) {
             this.dataSource[resp.position -1] = resp;
             this.tableRef.renderRows();
-            console.log('Elemento EDITADO!');
         }
         else {
 
           const positionExists = this.dataSource.map(p => p.position).includes(resp.position)
 
-          console.log(positionExists);
-
           if (! this.blnEdit && resp.position > 0) {
             //this.cdr.detectChanges();
             this.dataSource.push(resp);
             this.tableRef.renderRows();
-            console.log('Elemento Incluido!');
           }
         }
 
         // Se os dados foram retornados do modal, atualize o dataSource
-        console.log(tableResp.position)
-        console.log(tableResp.name)
-        console.log(tableResp.weight)
-        console.log(tableResp.symbol)
 
       } else {
-        console.log('Elemento não EDITADO!');
       }
     });
   }
@@ -97,10 +88,8 @@ export class PeriodicaComponent {
             leftButtonLabel: 'Sim', rightButtonLabel: 'Não'}}).afterClosed().subscribe(
       resp => {
       if(resp){
-        console.log('Elemento não apagado !');
       } else {
         this.dataSource = this.dataSource.filter(p => p.position !== deleteCategory?.position);
-        console.log('Elemento apagado !');
       }
 
     })

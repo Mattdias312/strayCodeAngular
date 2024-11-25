@@ -1,10 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 const authenticateJWT = (req, res, next) => {
-  console.log('authenticate');
+  console.log('authenticate',req.headers['x-access-token']);
   const token = req.headers['x-access-token']; // Extrai o token do header Authorization
-
-  console.log('auth  ', token)
 
   if (!token) {
     return res.status(403).json({ message: 'Acesso negado. Token não fornecido.' });
@@ -15,6 +13,7 @@ const authenticateJWT = (req, res, next) => {
     req.user = decoded; // Adiciona as informações do usuário ao request
     next();
   } catch (error) {
+    console.log('Token inválido ou expirado.',error);
     res.status(401).json({ message: 'Token inválido ou expirado.' });
   }
 };

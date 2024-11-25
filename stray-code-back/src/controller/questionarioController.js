@@ -1,4 +1,5 @@
 var Questionario = require('../model/questionarioModel');
+const mongoose = require('mongoose');
 
 exports.getquestionario = async function (req, res){
     try{
@@ -10,6 +11,7 @@ exports.getquestionario = async function (req, res){
 };
 
 exports.create = function (req, res){
+    console.log('create', req.body)
 
     let questionario = new Questionario(
         {
@@ -29,17 +31,21 @@ exports.create = function (req, res){
 
 exports.details = async function (req, res) {
     try {
-        const result = await Questionario.findById(req.params.id);
+        const userId = new mongoose.Types.ObjectId(req.params.id);
+        const result = await Questionario.findOne({ usuario: userId });
         if (!result) {
-            return res.status(404).send({ message: "Projeto não encontrado!" });
+            return res.status(404).send({ message: "Projeto não encontrado para este usuário!" });
         }
-        res.status(200).json(result)
-    }catch (err) {
-        res.status(500).json(err);
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 };
 
+
+
 exports.updatequestionario = async function (req, res) {
+    console.log('updating question')
     try {
         const updatedquestionario = await Questionario.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!updatedquestionario) {

@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 // import { ElementDialogComponent } from './_models/element-dialog/element-dialog.component';
 import { RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -21,12 +22,12 @@ import { MatInputModule } from '@angular/material/input';
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
               MatTableModule, RouterLink,
               MatDialogModule,  MatCardModule, ReactiveFormsModule,
-              MatInputModule, MatDividerModule, MatSidenav ],
+              MatInputModule, MatDividerModule, MatSidenav, CommonModule, FormsModule ],
     exports: [MatSidenavModule, MatListModule, MatCheckboxModule,
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
               MatTableModule, RouterLink,
               MatDialogModule, MatCardModule, ReactiveFormsModule,
-              MatInputModule, MatDividerModule, MatSidenav ],
+              MatInputModule, MatDividerModule, MatSidenav, CommonModule, FormsModule ],
 })
 
 export class MaterialModule {

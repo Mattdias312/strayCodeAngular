@@ -1,11 +1,13 @@
 import { Component, OnInit, Injectable, Input } from '@angular/core';
-import { MaterialModule } from '../../material.module';
-import { AutorizacaoService } from '../../_service/service.component';
+import { MaterialModule } from '../material.module';
+import { AutorizacaoService } from '../_service/user-service.component';
 import { LoginModel } from './login-model.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { CategoryEditComponent } from '../../category.edit/category.edit.component';
+import { CategoryEditComponent } from '../category.edit/category.edit.component';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
@@ -30,7 +32,10 @@ export class LoginComponent implements OnInit{
 
   constructor(public formBuilder: FormBuilder,
     public autorizacaoService:AutorizacaoService,
-    private cookieService: CookieService) {  }
+    private cookieService: CookieService,
+    private router: Router,
+    public header: HeaderComponent
+  ) {  }
 
   usuarios:LoginModel[] = [] as LoginModel[];
   novoUsuario:LoginModel = {} as LoginModel;
@@ -40,6 +45,8 @@ export class LoginComponent implements OnInit{
   alertText: String = '';
   usuarioExiste: boolean = false;
   usuarioLogado: boolean = false;
+  showPassword = false;
+  token:boolean = true
   usuario:LoginModel = {
     usuario: '',
     senha: ''
@@ -65,9 +72,9 @@ export class LoginComponent implements OnInit{
       usuario: '',
       senha: ''
     }
-    console.log("cookie ID",this.cookieService.get('id'));
-    console.log("cookie token",this.cookieService.get('token'));
-  }
+
+
+}
 
    async cadastrar(){
     this.alert=true
@@ -102,16 +109,18 @@ export class LoginComponent implements OnInit{
     }
    }
 
+   AlternarVisibilidade() {
+    this.showPassword = !this.showPassword;
+  }
+
   async verificaSeUsuarioExiste(): Promise<boolean> {
     this.usuario.usuario = this.usuarioForm.get('usuario')?.value;
     this.usuario.senha = this.usuarioForm.get('senha')?.value;
 
     try {
       const resultado = await this.autorizacaoService.cadastrar(this.usuario).toPromise();
-      console.log("Resultado da API:", !resultado);
       return !resultado; // Retorna o boolean recebido da API
     } catch (error) {
-      console.error("Erro ao verificar usuário:", error);
       return false;
     }
   }
@@ -122,7 +131,6 @@ export class LoginComponent implements OnInit{
     this.usuario.senha = this.usuarioForm.get('senha')?.value;
 
     if (!this.autorizacaoService.statusLogin()) {
-      console.log("Iniciando login...");
       try {
         this.autorizacaoService.autorizar(this.usuario).subscribe(async (response) => {
           const token = response.token;
@@ -134,23 +142,10 @@ export class LoginComponent implements OnInit{
             this.cookieService.set('token',response.token,1/24)
             this.infoUsuario.token = token;
             localStorage.setItem("login", "SIM");
-            console.log("Login bem-sucedido");
-          } else {
-
+            this.router.navigate(['/perfil'])
           }
 
-          console.log("usuario logado", this.usuarioLogado);
-
-          console.log("Response", response, token);
-          this.autorizacaoService.detalheUsuario(response.id,response.token).subscribe((response2: any) => {
-              console.log("2nd response", response2);
-            this.infoUsuario.id = response2._id
-            this.infoUsuario.usuario = response2.usuario
-            console.log("cookie ID",this.cookieService.get('id'));
-            console.log("cookie token",this.cookieService.get('token'));
-          })
       }, (_error) => {
-            console.log("Falha no login");
             this.alert = true;
             this.alertType = 'danger';
             this.alertText = 'Usuário e/ou senha incorreto';
@@ -165,7 +160,6 @@ export class LoginComponent implements OnInit{
         setTimeout(() => (this.alert = false), this.timeout);
       }
     } else {
-      console.log("Usuário já está logado.");
       this.usuarioLogado = true;
     }
 

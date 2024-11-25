@@ -14,7 +14,5 @@ export class HomeComponent {
 
 
   ngOnInit(){
-    console.log("cookie ID",this.cookieService.get('id'));
-    console.log("cookie token",this.cookieService.get('token'));
   }
 }
