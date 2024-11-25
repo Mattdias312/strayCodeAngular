@@ -5,7 +5,7 @@ import { CookieService } from "ngx-cookie-service";
 import { AutorizacaoService } from "../_service/user-service.component";
 import { Router } from '@angular/router';
 import { HeaderComponent } from "../header/header.component";
-import { RedefinirModel } from "../login/redefinir-senha-model.component";
+import { RedefinirModel } from "./redefinir-senha-model.component";
 import { CommonModule } from '@angular/common';
 
 
@@ -84,7 +84,6 @@ export class PerfilComponent implements OnInit{
 
     alterarSenha(){
       if(this.passwordsMatch()){
-        console.log('alterarSenha',this.infoUsuario.id,this.infoUsuario.token, this.password)
         this.autorizacaoService.atualizarSenha(this.infoUsuario.id,this.infoUsuario.token, this.password).subscribe((response: any) => {
           this.showResetPassword = false;
           this.password = '';
