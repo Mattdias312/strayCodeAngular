@@ -175,32 +175,11 @@ export class QuestionarioComponent {
       this.infoQuestionario.ramoEmpresa = this.questionarioForm.get('ramo')?.value
       this.infoQuestionario.cnae = this.questionarioForm.get('cnae')?.value
       this.infoQuestionario.usuario = this.infoUsuario.id
-      console.log(this.idQuetionario)
       if(this.idQuetionario == ''){
-        console.log(this.infoQuestionario)
-        console.log(this.infoUsuario.token)
-        console.log(this.infoUsuario.id)
-        this.questionarioService.cadastrar(this.infoUsuario.token, this.infoQuestionario).subscribe({
-          next: (response) => {
-            console.log('Resposta do servidor:', response);
-          },
-          error: (err) => {
-            console.error('Erro na requisição:', err);
-          }
-        });
+        this.questionarioService.cadastrar(this.infoUsuario.token, this.infoQuestionario).toPromise();
       }else{
-        console.log(this.infoUsuario.token)
-        this.autorizacaoService.atualizarQuest(this.idQuetionario, this.infoUsuario.token,this.infoQuestionario).subscribe({
-          next: (response) => {
-            console.log('Resposta do servidor:', response);
-          },
-          error: (err) => {
-            console.error('Erro na requisição:', err);
-          }
-        });
+        this.autorizacaoService.atualizarQuest(this.idQuetionario, this.infoUsuario.token,this.infoQuestionario).toPromise();
       }
-
-
 
       this.questionarioForm.controls['tipo'].setValue(null)
       this.questionarioForm.controls['ramo'].setValue(null)

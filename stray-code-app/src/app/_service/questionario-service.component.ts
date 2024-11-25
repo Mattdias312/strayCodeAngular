@@ -40,7 +40,6 @@ export class QuestionarioService {
       'x-access-token': token
     });
     try{
-      console.log(`${questionarioURI}`)
       return this.http.post<any>(`${questionarioURI}`, infoQuestionario, {headers});
 
     }catch(err){
@@ -54,7 +53,6 @@ export class QuestionarioService {
       'x-access-token': token
     });
     try{
-      console.log(`${questionarioURI}/${id}`)
       return this.http.put<any>(`${questionarioURI}/${id}`, infoQuestionario, {headers});
 
     }catch(err){
