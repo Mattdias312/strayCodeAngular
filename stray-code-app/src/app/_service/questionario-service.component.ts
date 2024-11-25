@@ -60,4 +60,17 @@ export class QuestionarioService {
     }
   }
 
+  deletar(id:string, token:string){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-access-token': token
+    });
+    try{
+      return this.http.delete<any>(`${questionarioURI}/${id}`, {headers});
+
+    }catch(err){
+      return of(false);
+    }
+  }
+
 }

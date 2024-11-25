@@ -132,7 +132,7 @@ export class PerfilComponent implements OnInit{
     }
 
     deletar(){
-      this.autorizacaoService.deletarUsuario(this.infoUsuario.id,this.infoUsuario.token).subscribe((response: any) => {
+      this.autorizacaoService.deletarUsuario(this.infoUsuario.id,this.infoUsuario.token).subscribe(() => {
         this.logout();
       });
     }

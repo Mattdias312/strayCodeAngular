@@ -229,5 +229,17 @@ export class QuestionarioComponent {
     this.toggleEdit = false
   }
 
+  deletar(){
+    this.questionarioService.deletar(this.idQuetionario,this.infoUsuario.token).subscribe(() => {
+      this.questionarioForm.controls['tipo'].setValue(null)
+      this.questionarioForm.controls['ramo'].setValue(null)
+      this.questionarioForm.controls['cnae'].setValue(null)
+      this.ramoEmpresaFiltrado = [];
+      this.cnaeFiltrado = [];
+      this.cookieService.set('idQuest','');
+      this.idQuetionario = '';
+    })
+  }
+
 
 }
