@@ -1,3 +1,17 @@
+<div>
+  @if (alert && alertType=='success') {
+    <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{alertText}}</strong>
+    </div>
+  }
+  @if (alert && alertType=='danger') {
+    <div id="myAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>{{alertText}}</strong>
+    </div>
+  }
+
+</div>
+
 <mat-card-content>
   <div class="col-md-2">
     <label for="">Usuário</label>
@@ -6,7 +20,7 @@
   </div>
   @if (showResetPassword){
 
-    <h3>Redefinir Senha</h3>
+    <h3 class="redefinir">Redefinir Senha</h3>
     <div class="password-container col-md-2">
       <input
         [type]="showPassword ? 'text' : 'password'"
@@ -37,8 +51,11 @@
       </i>
     </div>
 
+    <p [ngStyle]="{ color: passwordLength() ? 'green' : 'red' }">
+      {{ '* A senha dete ter no mínimo 5 caracters' }}
+    </p>
     <p [ngStyle]="{ color: passwordsMatch() ? 'green' : 'red' }">
-      {{ passwordsMatch() ? 'As senhas coincidem' : 'As senhas não coincidem' }}
+      {{ passwordsMatch() ? '* As senhas coincidem' : '* As senhas não coincidem' }}
     </p>
   }
   </mat-card-content>

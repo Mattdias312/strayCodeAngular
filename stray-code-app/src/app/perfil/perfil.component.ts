@@ -45,6 +45,10 @@ export class PerfilComponent implements OnInit{
   usuarioLogado: boolean = false;
   token:boolean = true
 
+  timeout: number = 4000;
+  alert:boolean = false;
+  alertType: String = '';
+  alertText: String = '';
   password:string = '';
   confirmPassword:string = '';
   showPassword:boolean = false;
@@ -82,13 +86,36 @@ export class PerfilComponent implements OnInit{
       return this.password === this.confirmPassword && this.password.length > 0;
     }
 
+    passwordLength(){
+      return String(this.password).length >= 5
+    }
+
     alterarSenha(){
-      if(this.passwordsMatch()){
+      if(!String(this.password).trim()){
+        this.alert=true
+        this.alertType = 'danger'
+        this.alertText = 'Deve Informar a senha'
+        setTimeout(() => this.alert=false, this.timeout)
+      }else if(String(this.password).length < 5){
+        this.alert=true
+        this.alertType = 'danger'
+        this.alertText = 'A senha dete ter no mínimo 5 caracters'
+        setTimeout(() => this.alert=false, this.timeout)
+      }else if(!(this.password === this.confirmPassword)){
+        this.alert=true
+        this.alertType = 'danger'
+        this.alertText = 'As senhas não coincidem'
+        setTimeout(() => this.alert=false, this.timeout)
+      }else if(this.passwordsMatch()){
         this.autorizacaoService.atualizarSenha(this.infoUsuario.id,this.infoUsuario.token, this.password).subscribe((response: any) => {
-          this.showResetPassword = false;
-          this.password = '';
-          this.confirmPassword = '';
-          this.senhaForm.reset();
+        this.showResetPassword = false;
+        this.password = '';
+        this.confirmPassword = '';
+        this.senhaForm.reset();
+        this.alert=true
+        this.alertType = 'success'
+        this.alertText = 'Senha alterada com sucesso'
+        setTimeout(() => this.alert=false, this.timeout)
         });
       }
     }
