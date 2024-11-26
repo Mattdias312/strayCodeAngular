@@ -24,6 +24,8 @@ Este projeto tem por finalidade auxiliar pessoas que desejam abrir empresas, for
 
 ## 📽 Apresentação Final
 
+A demonstração do projeto exibe as principais funcionalidades implementadas, permitindo explorar as telas, interações e recursos desenvolvidos. Inclui exemplos práticos de uso e destaca como o sistema atende aos requisitos definidos.
+
 ### 📌 Demonstração das telas informativas
 ![Demonstração das telas informativas](https://github.com/user-attachments/assets/29002911-2c9a-4069-b9cd-1f49b21e0746)
 
@@ -34,6 +36,8 @@ Este projeto tem por finalidade auxiliar pessoas que desejam abrir empresas, for
 
 ## 📦 Backlogs Jira
 
+O backlog do projeto lista as tarefas planejadas e pendentes, organizadas por prioridade. Ele inclui melhorias futuras, funcionalidades não implementadas na versão atual e ideias para expandir o escopo do projeto. Esta seção serve como um guia para o desenvolvimento contínuo e colaborações futuras.
+
 ![Backlog 1](https://github.com/user-attachments/assets/56f88a41-4ab9-48ec-8e93-c85b15c2c1d9)  
 ![Backlog 2](https://github.com/user-attachments/assets/eedc524b-1953-4783-9a0d-a517a78ad748)  
 ![Backlog 3](https://github.com/user-attachments/assets/bba11ed5-b5da-4bf3-b192-f27b1a5ae2fa)
@@ -42,6 +46,8 @@ Este projeto tem por finalidade auxiliar pessoas que desejam abrir empresas, for
 
 ## 💻 Linguagens Utilizadas
 
+Este projeto foi desenvolvido utilizando uma combinação de linguagens de programação e tecnologias modernas para garantir uma experiência de usuário eficiente e um sistema robusto. A escolha dessas linguagens reflete nossa busca por soluções rápidas, escaláveis e de fácil manutenção. A seguir estão as principais linguagens utilizadas no desenvolvimento do StrayCode:
+
 [![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=fff)](#) [![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white)](#) [![Java](https://img.shields.io/badge/Java-%23ED8B00.svg?logo=openjdk&logoColor=white)](#)  
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)](#) [![JSON](https://img.shields.io/badge/JSON-000?logo=json&logoColor=fff)](#) [![Markdown](https://img.shields.io/badge/Markdown-%23000000.svg?logo=markdown&logoColor=white)](#)
 
@@ -49,18 +55,24 @@ Este projeto tem por finalidade auxiliar pessoas que desejam abrir empresas, for
 
 ## 🖼️ Frameworks, Platforms e Libraries
 
+Para o desenvolvimento deste projeto, utilizamos uma série de frameworks, plataformas e bibliotecas que otimizaram o processo de criação e garantiram a qualidade e a escalabilidade da aplicação. Esses recursos proporcionaram uma base sólida para o desenvolvimento tanto no front-end quanto no back-end, permitindo uma integração eficiente e funcionalidades avançadas. Abaixo, destacamos as principais ferramentas utilizadas:
+
 [![Angular](https://img.shields.io/badge/Angular-%23DD0031.svg?logo=angular&logoColor=white)](#) [![Express.js](https://img.shields.io/badge/Express.js-%23404d59.svg?logo=express&logoColor=%2361DAFB)](#) [![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)](#)  
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens) ![Nodemon](https://img.shields.io/badge/NODEMON-%23323330.svg?style=for-the-badge&logo=nodemon&logoColor=%BBDEAD)
+[![JWT](https://img.shields.io/badge/JWT-000?logo=jsonwebtokens&logoColor=white)](#) [![Nodemon](https://img.shields.io/badge/Nodemon-%23323330.svg?logo=nodemon&logoColor=BBDEAD)](#)
 
 ---
 
 ## 💻 IDEs Utilizadas
+
+A escolha das ferramentas de desenvolvimento (IDEs) é crucial para otimizar o fluxo de trabalho dos desenvolvedores e garantir que o código seja escrito de forma eficiente e sem erros. No projeto StrayCode, utilizamos as seguintes IDEs para maximizar a produtividade e facilitar o processo de codificação:
 
 [![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?logo=intellij-idea&logoColor=white)](#) [![NetBeans IDE](https://img.shields.io/badge/NetBeans%20IDE-1B6AC6.svg?logo=apache-netbeans-ide&logoColor=white)](#) [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white)](#)
 
 ---
 
 ## 📄 Documentação e Protótipo
+
+Para garantir a clareza e transparência durante o desenvolvimento do StrayCode, foi criada uma documentação detalhada e protótipos que ajudam a visualizar e entender melhor o fluxo e as funcionalidades do sistema. A documentação é fundamental para comunicar o escopo do projeto, as etapas de desenvolvimento e os resultados alcançados. Aqui estão os principais materiais disponíveis:
 
 - **Documentação do Projeto (PDF):** [Download](https://github.com/Mattdias312/strayCodeAngular/blob/master/ProjetoInterdisciplinar_COMPLETO%202.pdf)  
 - **Links dos repositórios do projeto:**  
