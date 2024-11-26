@@ -1,5 +1,5 @@
-
-  <div class="container-fluid">
+<div class="container card mt-6">
+  <div>
     @if (alert && alertType=='success') {
       <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>{{alertText}}</strong>
@@ -11,7 +11,7 @@
       </div>
     }
   </div>
-     <h1 class="espacamento">Questionário</h1>
+     <h1 class="d-flex justify-content-center">Questionário</h1>
   <div class="container-fluid col-12 align-items-start espacamento">
     <form [formGroup]="questionarioForm" #tableForm="ngForm">
       <label class="form-label align-items-start">Tipo Empresa</label>
@@ -40,7 +40,7 @@
     </form>
   </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid mt-3">
       <mat-card-actions class="botaoQuestionario d-flex justify-content-evenly align-items-center">
         @if(toggleEdit){
           <button mat-raised-button color="warn" (click)="deletar()">Deletar</button>
@@ -51,3 +51,4 @@
         <button mat-raised-button color="primary" (click)="cadastrar()" [disabled]="edit">Cadastrar Resposta</button>
       </mat-card-actions>
     </div>
+</div>

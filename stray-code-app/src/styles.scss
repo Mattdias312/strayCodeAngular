@@ -1,227 +1,232 @@
-/* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-.flx-center-row{
+.abertura {
+    background-image: url(assets/img/aberturaEmpresa.jpg);
+}
+
+.contabilidade {
+    background-image: url(assets/img/contabilidade.jpg);
+}
+
+.tributacao {
+    background-image: url(assets/img/tributacao.jpg);
+}
+
+.marketing {
+    background-image: url(assets/img/marketing.jpg);
+}
+
+.financeiro {
+    background-image: url(assets/img/financeiro.jpg);
+}
+
+.concorrente {
+    background-image: url(assets/img/concorrente.jpg);
+}
+
+.notaFiscal {
+    background-image: url(assets/img/notaFical.jpg);
+}
+
+.cnae {
+    background-image: url(assets/img/cnae.jpg);
+    background-size: 220vh 82vh;
+}
+
+.flx-center-row {
     display: flex;
-    flex-direction: row ;
+    flex-direction: row;
     align-items: center;
 }
 
-.flx-evly{
+.flx-evly {
     justify-content: space-evenly;
 }
 
-.flx{
-  display: flex;
+.flx {
+    display: flex;
 }
 
-.flx-end{
-  display: flex;
-  align-items: flex-end;
+.flx-end {
+    display: flex;
+    align-items: flex-end;
 }
-
-
-
-
 
 footer {
-  background: linear-gradient(#321a44, #4b008400);
-  color: white;
-  padding: 20px 0;
-  display: flex;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
+    background: linear-gradient(#4b008400, #000000);
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }
 
 main {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 footer a {
-  color: white;
-  text-decoration: none;
-  margin-right: 20px;
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
 }
 
-.logo {
-  max-width: 20%;
-  border-radius: 100px;
-}
-
-.logoFooter {
-  max-width: 20%;
-  border-radius: 100px;
+.logo, .logoFooter {
+    max-width: 20%;
+    border-radius: 100px;
 }
 
 .home {
-  max-width: 30px;
-  border-radius: 100px;
+    max-width: 6vh;
 }
-
-
 
 .nav {
-  background: linear-gradient(#321a44, #4b008400) !important;
+    background: linear-gradient(#000000, #4b008400) !important;
 }
 
-.abertura {
-  background-image: url(assets/img/aberturaEmpresa.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
+.abertura, .contabilidade, .tributacao, .marketing, .financeiro, .concorrente, .notaFiscal, .cnae {
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
-.botaoQuestionario{
-  padding-top: 100px;
-  padding-bottom: 100px;
-}
-
-.espacamento{
-  padding-top: 50px;
-}
-
-.contabilidade{
-  background-image: url(assets/img/contabilidade.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.tributacao{
-  background-image: url(assets/img/tributacao.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.marketing{
-  background-image: url(assets/img/marketing.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.financeiro{
-  background-image: url(assets/img/financeiro.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.concorrente{
-  background-image: url(assets/img/concorrente.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.notaFiscal{
-  background-image: url(assets/img/notaFical.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.cnae{
-  background-image: url(assets/img/cnae.jpg);
-  background-size: 220vh 82vh;
-  background-repeat: no-repeat;
-}
-
-.index{
-  background-color: rgba(0, 255, 0, 0.15);
-  background-size: 100%;
-  background-repeat: no-repeat;
-}
-
-.imagemBG {
-  display: flex;
-  position: fixed;
-  right: 0;
-  height: 83vh;
+.index {
+    background-color: rgba(0, 255, 0, 0.15);
 }
 
 .texto {
-  height: 83vh;
-  background-color: #c3c4c5e0;
-  overflow-y: scroll;
-  text-align: justify;
+    height: 60vh;
+    background-color: #c3c4c5e0;
+    overflow-y: scroll;
+    text-align: justify;
+}
 
+.texto h2 {
+    color: #000000;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.texto h3 {
+    color: #333;
+    margin-top: 5rem;
+}
+
+.texto p, .texto dd {
+    margin-bottom: 1rem;
+    text-align: justify;
 }
 
 .texto::-webkit-scrollbar {
-  width: 10px;
-  background-color: #c3c4c5e0;
-  border-radius: 20px;
-  border: 3px solid #c3c4c5e0;
-}
-
-.texto::-webkit-scrollbar:hover {
-  width: 15px;
-  background-color: #c3c4c5e0;
-  border-radius: 20px;
-  border: 3px solid #c3c4c5e0;
+    width: 10px;
+    background-color: #c3c4c5e0;
+    border-radius: 20px;
+    border: 3px solid #c3c4c5e0;
 }
 
 .texto::-webkit-scrollbar-thumb {
-  background: #6b6b6be0;
-  border-radius: 20px;
-  border: 3px solid #bbbbbbe0;
+    background: #6b6b6be0;
+    border-radius: 5px;
+    border: 3px solid #bbbbbbe0;
 }
 
 .texto:hover::-webkit-scrollbar-thumb {
-  width: 15px;
-  background: #6b6b6be0;
-  border-radius: 20px;
-  border: 3px solid #bbbbbbe0;
+    background: #6b6b6be0;
 }
 
-.imgCarousel{
-  width: 50%;
+.content-wrapper-card {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-height: 15 0vh;
+    margin-top: 10px;
+    margin-bottom: 1px;
 }
 
-.imgCarouselVisao{
-  width: 51.5%;
-
+.fixed-header, .fixed-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 5rem;
+    z-index: 1000;
 }
 
-.fundoCarousel{
-  background-color: #c3c4c5e0;
+.fixed-header {
+    top: 0;
 }
 
-.textoCarousel{
-  margin-left: 40px;
-
+.fixed-footer {
+    bottom: 0;
 }
 
-.listaCarousel{
- font-size: larger;
- padding: 120px 0;
+.imgCarousel {
+    width: 50%;
 }
 
-.carousel{
-  padding: 11.3vh 0 11.3vh;
+.imgCarouselVisao {
+    width: 51.5%;
 }
 
-.active{
-  display: flex !important;
+.fundoCarousel {
+    background-color: #c3c4c5e0;
 }
 
-h2{
-  text-align: center;
+.textoCarousel {
+    margin-left: 40px;
+}
+
+.listaCarousel {
+    font-size: larger;
+    padding: 120px 0;
+}
+
+.carousel {
+    padding: 11.3vh 0 11.3vh;
+}
+
+.active {
+    display: flex !important;
+}
+
+@media (max-width: 768px) {
+    .abertura {
+        padding: 60px 10px;
+    }
+
+    .content-wrapper {
+        padding: 1rem;
+    }
+
+    .texto {
+        height: auto;
+        max-height: calc(100vh - 120px);
+    }
 }
 
 @media only screen and (max-height: 924px) {
-  .carousel{
-      padding: 14.5vh 0 14.5vh;
-  }
-  .texto {
-      height: 82vh;
-  }
+    .carousel {
+        padding: 14.5vh 0 14.5vh;
+    }
+
+    .texto {
+        height: 82vh;
+    }
 }
 
 @media only screen and (max-height: 670px) {
-  .carousel{
-      padding: 0.5vh 0 0.5vh;
-  }
+    .carousel {
+        padding: 0.5vh 0 0.5vh;
+    }
 
-  .texto {
-      height: 67.8vh;
-  }
+    .texto {
+        height: 67.8vh;
+    }
 }

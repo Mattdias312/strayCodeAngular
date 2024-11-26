@@ -12,11 +12,11 @@
 
 </div>
 
+<div class="content-wrapper-card">
 <mat-card-content>
   <div class="col-md-2">
-    <label for="">Usuário</label>
+    <label for="" class="d-flex justify-content-center">Usuário</label>
     <input type="text" class="form-control" [value]="infoUsuario.usuario" disabled>
-
   </div>
   @if (showResetPassword){
 
@@ -72,4 +72,4 @@
       <button mat-raised-button color="primary" (click)="alterarSenha()" >Alterar</button>
     }
   </mat-card-actions>
-
+</div>
