@@ -88,7 +88,8 @@ footer a {
 }
 
 .logo, .logoFooter {
-    max-width: 20%;
+    margin-top: 25px;
+    max-width: 10%;
     border-radius: 100px;
 }
 
@@ -98,7 +99,24 @@ footer a {
 
 .nav {
     background: linear-gradient(#000000, #4b008400) !important;
+      display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
 }
+
+.nav::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .nav::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  .nav::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 
 .abertura, .contabilidade, .tributacao, .marketing, .financeiro, .concorrente, .notaFiscal, .cnae {
     background-size: 100%;
@@ -214,7 +232,7 @@ footer a {
 }
 
 @media (max-width: 768px) {
-    .abertura {
+    .abertura, .contabilidade, .tributacao, .marketing, .financeiro, .concorrente, .notaFiscal, .cnae {
         padding: 60px 10px;
     }
 
