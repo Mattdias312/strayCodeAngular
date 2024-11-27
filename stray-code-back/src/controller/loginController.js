@@ -16,7 +16,7 @@ exports.login = async function (req, res) {
             if (isMatch) {
                 const token = jwt.sign({userID: verificaLogin._id, username: verificaLogin.usuario},
                                         process.env.JWT_SECRET, {expiresIn: '1h'});
-                res.status(201).send({ message: 'login efetuado', success: true, token: token, id: verificaLogin._id});
+                res.status(200).send({ message: 'login efetuado', success: true, token: token, id: verificaLogin._id});
 
             }else{
                 res.status(400).send({ message: 'Usuário e/ou senha incorreto' });
@@ -33,7 +33,7 @@ exports.create = async function (req, res) {
     
     try {
         const verificaLogin = await User.findOne({ usuario: req.body.usuario });
-        
+
         if (!verificaLogin) {
             let user = new User({
                 usuario: req.body.usuario,

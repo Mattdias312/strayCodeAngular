@@ -5,7 +5,6 @@ const loginRoute = require('./routes/loginRoute');
 const userRoute = require('./routes/userRoute')
 const questionarioRoute = require('./routes/questionarioRoute');
 const mongoose = require('mongoose');
-const port = 3000;
 const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger_output.json');

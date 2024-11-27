@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 let projectSchema = new Schema({
     tipoEmpresa:
     {
-        type: String, required: true
+        type: String, required: true,
+        enum: ['Comércio', 'Indústria', 'Serviço'],
+        required: true
     },
     ramoEmpresa:
     {

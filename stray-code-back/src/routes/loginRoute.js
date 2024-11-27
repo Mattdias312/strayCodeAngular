@@ -4,6 +4,6 @@ const loginController = require('../controller/loginController');
 const encryptPassword = require('../middleware/encryptPassword');
 
 router.post('/login', loginController.login);
-router.post('/register', encryptPassword, loginController.create);
+router.post('/register', loginController.create);
 
 module.exports = router;
