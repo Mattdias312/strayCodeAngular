@@ -83,12 +83,12 @@ async cadastrar() {
   } else {
     if (!String(this.usuarioForm.get('usuario')?.value).trim()) {
       this.showAlert('Erro', 'Deve informar o nome de usuário', 'error');
-    } else if (String(this.usuarioForm.get('usuario')?.value).length < 5) {
-      this.showAlert('Erro', 'O nome de usuário deve ter no mínimo 5 caracteres', 'error');
+    } else if (String(this.usuarioForm.get('usuario')?.value).length < 3) {
+      this.showAlert('Erro', 'O nome de usuário deve ter no mínimo 3 caracteres', 'error');
     } else if (!String(this.usuarioForm.get('senha')?.value).trim()) {
       this.showAlert('Erro', 'Deve informar a senha', 'error');
-    } else if (String(this.usuarioForm.get('senha')?.value).length < 5) {
-      this.showAlert('Erro', 'A senha deve ter no mínimo 5 caracteres', 'error');
+    } else if (String(this.usuarioForm.get('senha')?.value).length < 6) {
+      this.showAlert('Erro', 'A senha deve ter no mínimo 6 caracteres', 'error');
     } else {
       this.showAlert('Sucesso', 'Cadastrado com sucesso', 'success');
       this.novoUsuario = this.usuarioForm.value;
@@ -127,14 +127,14 @@ async cadastrar() {
   async clickLogin() {
     this.usuario.usuario = this.usuarioForm.get('usuario')?.value;
     this.usuario.senha = this.usuarioForm.get('senha')?.value;
-  
+
     if (!this.autorizacaoService.statusLogin()) {
       try {
         this.autorizacaoService.autorizar(this.usuario).subscribe(async (response) => {
           const token = response.token;
-  
+
           this.usuarioLogado = !!token;
-  
+
           if (this.usuarioLogado) {
             this.cookieService.set('id', response.id, 1/24);
             this.cookieService.set('token', response.token, 1/24);
@@ -152,7 +152,7 @@ async cadastrar() {
     } else {
       this.usuarioLogado = true;
     }
-  
+
     return this.usuarioLogado;
   }
 

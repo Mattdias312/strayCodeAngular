@@ -2,7 +2,7 @@
   <div class="card col-md-6 profile-card">
     <div class="card-body">
       <h2 class="card-title text-center mb-4">Perfil do Usuário</h2>
-      
+
       <div class="mb-3">
         <label for="usuario" class="form-label">Usuário</label>
         <input type="text" class="form-control" id="usuario" [value]="infoUsuario.usuario" disabled>
@@ -28,7 +28,7 @@
         </div>
 
         <p [ngClass]="passwordLength() ? 'text-success' : 'text-danger'">
-          * A senha deve ter no mínimo 5 caracteres
+          * A senha deve ter no mínimo 6 caracteres
         </p>
         <p [ngClass]="passwordsMatch() ? 'text-success' : 'text-danger'">
           {{ passwordsMatch() ? '* As senhas coincidem' : '* As senhas não coincidem' }}

@@ -77,14 +77,14 @@ export class PerfilComponent implements OnInit {
   }
 
   passwordLength() {
-    return String(this.password).length >= 5
+    return String(this.password).length >= 6
   }
 
   alterarSenha() {
     if (!String(this.password).trim()) {
       this.showAlert('error', 'Deve informar a senha');
-    } else if (String(this.password).length < 5) {
-      this.showAlert('error', 'A senha deve ter no mínimo 5 caracteres');
+    } else if (String(this.password).length < 6) {
+      this.showAlert('error', 'A senha deve ter no mínimo 6 caracteres');
     } else if (!(this.password === this.confirmPassword)) {
       this.showAlert('error', 'As senhas não coincidem');
     } else if (this.passwordsMatch()) {
