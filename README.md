@@ -28,7 +28,7 @@ A demonstração do projeto exibe as principais funcionalidades implementadas, p
 
 ### 📌 Demonstração das telas informativas e Formulário para cadastro de dados da empresa após realizar o login
 ![Demonstração das telas informativas](https://github.com/user-attachments/assets/d8771c33-9b58-4430-bcc7-af069c50d116)
-)
+
 
 
 
