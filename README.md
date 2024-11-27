@@ -5,7 +5,9 @@
 
 ## 📝 Resumo do Projeto
 
-Este projeto tem por finalidade auxiliar pessoas que desejam abrir empresas, fornecendo informações relevantes para administrá-las de forma adequada. Foi desenvolvido um sistema web onde o usuário pode responder um questionário sobre o tipo, ramo e atividade da empresa. Com base nas respostas, o sistema fornece informações contábeis e fiscais sobre a abertura da empresa.
+Este projeto tem como objetivo principal apoiar empreendedores e pessoas interessadas em abrir e administrar suas próprias empresas, oferecendo um conjunto abrangente de informações essenciais para a correta gestão contábil e fiscal. Para isso, foi desenvolvido um sistema web interativo que permite ao usuário responder a um questionário personalizado sobre o tipo de empresa, seu ramo de atuação e as atividades que pretende exercer.
+
+Com base nas respostas fornecidas, o sistema gera recomendações detalhadas e relevantes, oferecendo orientações precisas sobre os procedimentos necessários para a abertura da empresa, além de apresentar informações sobre questões contábeis e fiscais que envolvem o processo, como impostos, registros e obrigações legais. Dessa forma, o projeto visa facilitar o processo de formalização de novos negócios, garantindo que os empreendedores estejam bem informados e preparados para enfrentar os desafios da gestão empresarial de maneira eficiente e em conformidade com a legislação vigente.
 
 > _Projeto baseado na metodologia ágil SCRUM, com foco no desenvolvimento de proatividade, autonomia, colaboração e entrega de resultados pelos estudantes envolvidos._
 
