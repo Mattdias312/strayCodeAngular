@@ -33,6 +33,19 @@
     background-size: 220vh 82vh;
 }
 
+.button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .spinner {
+    margin-left: 8px;
+    width: 20px;
+    height: 20px;
+  }
+
 .flx-center-row {
     display: flex;
     flex-direction: row;
@@ -97,8 +110,10 @@ footer a {
 }
 
 .texto {
-    height: 60vh;
+    height: 78vh;
     background-color: #c3c4c5e0;
+    border-radius: 1%;
+    padding: 3%;
     overflow-y: scroll;
     text-align: justify;
 }
@@ -139,12 +154,13 @@ footer a {
 }
 
 .content-wrapper-card {
-    max-width: 1000px;
+    max-width: 115vh;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.95);
+    // background-color: rgba(255, 255, 255, 0.95);
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    max-height: 15 0vh;
+    max-height: 90vh;
+    min-height: 79vh;
     margin-top: 10px;
     margin-bottom: 1px;
 }
