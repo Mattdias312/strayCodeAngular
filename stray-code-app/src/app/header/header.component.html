@@ -1,49 +1,36 @@
-
 <mat-toolbar class="nav flx">
-  <!-- <mat-toolbar color="primary"> -->
-    <!-- <button mat-icon-button (click)="openSideNav()">
-      <mat-icon>menu</mat-icon>
+  <div class="flx">
+    <button mat-button [routerLink]="['/']">
+      <img src="../../assets/img/newLogoIcon-removed.png" class="home" alt="Logo StrayCode" title="Home">
     </button>
-
-    <span> Aplicação Checklist </span> -->
-
-  <!-- <div class="flx"> -->
-    <div class="flx">
-
-      <button mat-button [routerLink]="['/']"  ><img src="../../assets/img/strayCode.png" class="home"  alt="..." ></button>
-      <button mat-button [routerLink]="['/abertura']">Abertura de Empresa</button>
-      <button mat-button [routerLink]="['/contabilidade']">Escolhendo Contabilidade</button>
-      <button mat-button [matMenuTriggerFor]="planejamento" >Planejamento</button>
-      <mat-menu #planejamento="matMenu">
-        <button mat-menu-item [routerLink]="['/marketing']" >Marketing</button>
-        <button mat-menu-item [routerLink]="['/financeiro']" >Financeiro</button>
-        <button mat-menu-item [routerLink]="['/nota-fiscal']" >Nota Fiscal</button>
-      </mat-menu>
-      <button mat-button [matMenuTriggerFor]="informacoes" >Informações</button>
-      <mat-menu #informacoes="matMenu">
-        <button mat-menu-item [routerLink]="['/cnae']" >Escolhendo segmento CNAE</button>
-        <button mat-menu-item [routerLink]="['/tributacao']" >Escolhendo Tributação</button>
-      </mat-menu>
-      @if (autorizaService.statusLogin()) {
-        <button mat-button [routerLink]="['/questionario']" >Questionário</button>
-      }
-    </div>
-    @if (this.alteraHeader()){
-      <div class="flx-end">
-        <button mat-button [routerLink]="['/login']">Login</button>
-
-      </div>  
-
-    }@else{
-
-      <div class="flx-end">
-        <button mat-button [routerLink]="['/perfil']">perfil</button>
-
-      </div>
+    <button type="button" [routerLink]="['/abertura']" class="mr-2 btn btn-dark">Abertura de Empresa</button>
+    <button type="button" [routerLink]="['/contabilidade']" class="mr-2 btn btn-dark">Escolhendo Contabilidade</button>
+    <button type="button" [matMenuTriggerFor]="planejamento" class="mr-2 btn btn-dark">
+      Planejamento
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #planejamento="matMenu">
+      <button mat-menu-item [routerLink]="['/marketing']">Marketing</button>
+      <button mat-menu-item [routerLink]="['/financeiro']">Financeiro</button>
+      <button mat-menu-item [routerLink]="['/nota-fiscal']">Nota Fiscal</button>
+    </mat-menu>
+    <button type="button" [matMenuTriggerFor]="informacoes" class="mr-2 btn btn-dark">
+      Informações
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #informacoes="matMenu">
+      <button mat-menu-item [routerLink]="['/cnae']">Escolhendo segmento CNAE</button>
+      <button mat-menu-item [routerLink]="['/tributacao']">Escolhendo Tributação</button>
+    </mat-menu>
+    @if (autorizaService.statusLogin()) {
+      <button type="button" [routerLink]="['/questionario']" class="mr-2 btn btn-dark">Questionário</button>
     }
-
-    <!-- </div> -->
-  </mat-toolbar>
-
-
-
+  </div>
+  <div class="flx-end">
+    @if (this.alteraHeader()){
+      <button type="button" [routerLink]="['/login']" class="btn btn-dark">Login</button>
+    }@else{
+      <button type="button" [routerLink]="['/perfil']" class="mr-2 btn btn-dark">Perfil</button>
+    }
+  </div>
+</mat-toolbar>

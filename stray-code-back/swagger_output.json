@@ -178,7 +178,91 @@
         }
       }
     },
-    "/questionario": {
+    "/user/{id}/password": {
+  "put": {
+    "description": "Método responsável por atualizar a senha de um usuário no banco de dados.",
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "ID do usuário cujo senha será atualizada."
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "senha": {
+              "type": "string",
+              "example": "NovaSenha123",
+              "description": "A nova senha do usuário. Deve ter pelo menos 6 caracteres."
+            }
+          },
+          "required": ["senha"]
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Senha atualizada com sucesso.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "Senha atualizada com sucesso."
+            },
+            "data": {
+              "type": "object",
+              "description": "Dados do usuário com a senha atualizada (exceto o campo senha)."
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Erro de validação, como senha vazia ou com menos de 6 caracteres.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "A senha não pode ser vazia."
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Usuário não encontrado.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "Usuário não encontrado!"
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Erro interno do servidor.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "Erro ao atualizar usuário: mensagem_de_erro"
+            }
+          }
+        }
+      }
+    }
+  }
+},
+   "/questionario": {
       "get": {
         "description": "Método responsável por trazer as informações do questionário respondido pelo usuário e exibir para o mesmo",
         "parameters": [

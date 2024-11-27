@@ -1,27 +1,21 @@
-.password-container {
-  position: relative;
-  display: flex;
-  align-items: center;
+.card {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-input {
-  width: 100%;
-  padding-right: 40px;
-}
-
-.toggle-icon {
-  position: absolute;
-  right: 10px;
+.input-group-text {
   cursor: pointer;
-  font-size: 1.2rem;
 }
 
-p {
-  margin-top: 8px;
-  font-size: 0.9rem;
-  font-weight: bold;
+.form-control:disabled {
+  background-color: #e9ecef;
 }
 
-.redefinir{
-  margin-top: 50px;
+.vh{
+  height: 70vh;
+  width: 200vh;
+}
+
+.profile-card{
+  border: solid 1px;
+  box-shadow: 10px 5px 5px rgb(73, 73, 73);
 }
