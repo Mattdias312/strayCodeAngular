@@ -2,7 +2,7 @@
   "version": 2,
   "public": true,
   "env": {
-    "JWT_SECRET":"sdaecsvsfs",
+    "JWT_SECRET":"superSecreto_1/2/3",
     "MONGO_URI":"mongodb+srv://mattdias:Matt88082799@cluster0.n0lijok.mongodb.net/StrayCode?retryWrites=true&w=majority"
   },
   "builds": [
