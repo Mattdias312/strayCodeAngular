@@ -28,6 +28,8 @@ input {
   width: 100%;
   max-width: 400px;
   padding: 20px;
+  border: solid 1px;
+  box-shadow: 10px 5px 5px rgb(73, 73, 73);
 }
 
 .login-form {
