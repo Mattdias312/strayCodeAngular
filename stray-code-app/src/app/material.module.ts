@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { NgSelect2Module } from 'ng-select2';
 
 
 
@@ -22,14 +23,13 @@ import { CommonModule } from '@angular/common';
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
               MatTableModule, RouterLink,
               MatDialogModule,  MatCardModule, ReactiveFormsModule,
-              MatInputModule, MatDividerModule, MatSidenav, CommonModule, FormsModule ],
+              MatInputModule, MatDividerModule, MatSidenav, CommonModule, FormsModule, NgSelect2Module],
     exports: [MatSidenavModule, MatListModule, MatCheckboxModule,
               MatIconModule, MatToolbarModule, MatButtonModule, FormsModule,
               MatTableModule, RouterLink,
               MatDialogModule, MatCardModule, ReactiveFormsModule,
-              MatInputModule, MatDividerModule, MatSidenav, CommonModule, FormsModule ],
+              MatInputModule, MatDividerModule, MatSidenav, CommonModule, FormsModule, NgSelect2Module ],
 })
 
-export class MaterialModule {
-
- }
+export class MaterialModule {}
+export class AppModule { }

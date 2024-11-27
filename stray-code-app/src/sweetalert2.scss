@@ -1,0 +1,30 @@
+@import 'sweetalert2/src/sweetalert2.scss';
+
+.swal2-icon {
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+.swal2-icon-content {
+  color: #000000 !important;
+}
+
+.swal2-success {
+  [class^='swal2-success-line'] {
+    background-color: #000000 !important;
+  }
+  .swal2-success-ring {
+    border-color: #000000 !important;
+  }
+}
+
+.swal2-error {
+  [class^='swal2-x-mark-line'] {
+    background-color: #000000 !important;
+  }
+}
+
+.swal2-warning, .swal2-info, .swal2-question {
+  border-color: #000000 !important;
+  color: #000000 !important;
+}

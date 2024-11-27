@@ -1,54 +1,33 @@
-<div class="container">
-  <div>
-  @if (alert && alertType=='success') {
-    <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>{{alertText}}</strong>
-    </div>
-  }
-  @if (alert && alertType=='danger') {
-    <div id="myAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>{{alertText}}</strong>
-    </div>
-  }
-
-    <mat-card>
-        <mat-card-header>
-            <h2>{{descricaoLogin()}}</h2>
-        </mat-card-header>
-        @if (this.token) {
-            <form [formGroup]="usuarioForm" #tableForm="ngForm">
-                <div class="col-md-2">
-                    <label for="login" class="form-label">Login</label>
-                    <input type="text" formControlName = "usuario" class="form-control" name="login" id="login" placeholder="login">
-                </div>
-                <div class="password-container col-md-2">
-                  <input
-                    [type]="showPassword ? 'text' : 'password'"
-                    placeholder="Digite sua senha"
-                    class="form-control"
-                    formControlName = "senha"
-                    name="senha"
-                    id="senha" />
-                  <i
-                    class="toggle-icon"
-                    (click)="AlternarVisibilidade()">
-                    <mat-icon>
-                      {{ showPassword ? 'visibility' : 'visibility_off' }}
-                    </mat-icon>
-                  </i>
-                </div>
-            </form>
-        }
-        <div class="flx-center-row flx-evly">
-              @if (!autorizacaoService.statusLogin()) {
-                <mat-card-actions class="flx-center-row">
-                  <button mat-raised-button color="primary" (click)="cadastrar()">Cadastrar</button>
-                </mat-card-actions>
-              }
-                <mat-card-actions class="flx-center-row">
-                    <button mat-raised-button color="primary" (click)="this.autorizacaoService.statusLogin() ? logout() : clickLogin() ">{{botaoLogin()}}</button>
-                </mat-card-actions>
-        </div>
-    </mat-card>
-  </div>
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>{{descricaoLogin()}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @if (this.token) {
+        <form [formGroup]="usuarioForm" #tableForm="ngForm" class="login-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Login</mat-label>
+            <input matInput formControlName="usuario" placeholder="login" id="login" name="login">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input matInput [type]="showPassword ? 'text' : 'password'"
+                   formControlName="senha" placeholder="Digite sua senha" id="senha" name="senha">
+            <button mat-icon-button matSuffix (click)="AlternarVisibilidade()" type="button">
+              <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+      }
+    </mat-card-content>
+    <mat-card-actions align="end">
+      @if (!autorizacaoService.statusLogin()) {
+        <button mat-raised-button color="primary" (click)="cadastrar()">Cadastrar</button>
+      }
+      <button mat-raised-button color="primary" (click)="this.autorizacaoService.statusLogin() ? logout() : clickLogin()">
+        {{botaoLogin()}}
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

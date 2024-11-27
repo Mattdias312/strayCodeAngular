@@ -8,6 +8,7 @@ import { CategoryEditComponent } from '../category.edit/category.edit.component'
 import { firstValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -40,9 +41,9 @@ export class LoginComponent implements OnInit{
   usuarios:LoginModel[] = [] as LoginModel[];
   novoUsuario:LoginModel = {} as LoginModel;
   timeout: number = 4000;
-  alert:boolean = false;
-  alertType: String = '';
-  alertText: String = '';
+  // alert:boolean = false;
+  // alertType: String = '';
+  // alertText: String = '';
   usuarioExiste: boolean = false;
   usuarioLogado: boolean = false;
   showPassword = false;
@@ -76,38 +77,25 @@ export class LoginComponent implements OnInit{
 
 }
 
-   async cadastrar(){
-    this.alert=true
-    if(await this.verificaSeUsuarioExiste()){
-      this.alertType = 'danger'
-      this.alertText = 'Esse usuário já existe'
-      setTimeout(() => this.alert=false, this.timeout)
-    }else{
-      if(!String(this.usuarioForm.get('usuario')?.value).trim()){
-        this.alertType = 'danger'
-        this.alertText = 'Deve Informar o nome de usuário'
-        setTimeout(() => this.alert=false, this.timeout)
-      }else if(String(this.usuarioForm.get('usuario')?.value).length < 5){
-        this.alertType = 'danger'
-        this.alertText = 'O nome de usuário deve ter no mínimo 5 caracteres'
-        setTimeout(() => this.alert=false, this.timeout)
-      }else if(!String(this.usuarioForm.get('senha')?.value).trim()){
-        this.alertType = 'danger'
-        this.alertText = 'Deve Informar a senha'
-        setTimeout(() => this.alert=false, this.timeout)
-      }else if(String(this.usuarioForm.get('senha')?.value).length < 5){
-        this.alertType = 'danger'
-        this.alertText = 'A senha dete ter no mínimo 5 caracters'
-        setTimeout(() => this.alert=false, this.timeout)
-      }else{
-        this.alertType = 'success'
-        this.alertText = 'Cadastrado com sucesso'
-        this.novoUsuario = this.usuarioForm.value;
-        this.usuarios.push(this.novoUsuario)
-        setTimeout(() => this.alert=false, this.timeout)
-      }
+async cadastrar() {
+  if (await this.verificaSeUsuarioExiste()) {
+    this.showAlert('Erro', 'Esse usuário já existe', 'error');
+  } else {
+    if (!String(this.usuarioForm.get('usuario')?.value).trim()) {
+      this.showAlert('Erro', 'Deve informar o nome de usuário', 'error');
+    } else if (String(this.usuarioForm.get('usuario')?.value).length < 5) {
+      this.showAlert('Erro', 'O nome de usuário deve ter no mínimo 5 caracteres', 'error');
+    } else if (!String(this.usuarioForm.get('senha')?.value).trim()) {
+      this.showAlert('Erro', 'Deve informar a senha', 'error');
+    } else if (String(this.usuarioForm.get('senha')?.value).length < 5) {
+      this.showAlert('Erro', 'A senha deve ter no mínimo 5 caracteres', 'error');
+    } else {
+      this.showAlert('Sucesso', 'Cadastrado com sucesso', 'success');
+      this.novoUsuario = this.usuarioForm.value;
+      this.usuarios.push(this.novoUsuario);
     }
-   }
+  }
+}
 
    AlternarVisibilidade() {
     this.showPassword = !this.showPassword;
@@ -125,44 +113,46 @@ export class LoginComponent implements OnInit{
     }
   }
 
+  private showAlert(title: string, text: string, icon: 'success' | 'error'): void {
+    Swal.fire({
+      title,
+      text,
+      icon,
+      confirmButtonColor: '#000000',
+      background: '#ffffff',
+      color: '#000000'
+    });
+  }
 
   async clickLogin() {
     this.usuario.usuario = this.usuarioForm.get('usuario')?.value;
     this.usuario.senha = this.usuarioForm.get('senha')?.value;
-
+  
     if (!this.autorizacaoService.statusLogin()) {
       try {
         this.autorizacaoService.autorizar(this.usuario).subscribe(async (response) => {
           const token = response.token;
-
+  
           this.usuarioLogado = !!token;
-
+  
           if (this.usuarioLogado) {
-            this.cookieService.set('id',response.id,1/24)
-            this.cookieService.set('token',response.token,1/24)
+            this.cookieService.set('id', response.id, 1/24);
+            this.cookieService.set('token', response.token, 1/24);
             this.infoUsuario.token = token;
             localStorage.setItem("login", "SIM");
-            this.router.navigate(['/perfil'])
+            this.router.navigate(['/perfil']);
           }
-
-      }, (_error) => {
-            this.alert = true;
-            this.alertType = 'danger';
-            this.alertText = 'Usuário e/ou senha incorreto';
-            setTimeout(() => (this.alert = false), this.timeout);
-      })
-
+        }, (_error) => {
+          this.showAlert('Erro', 'Usuário e/ou senha incorreto', 'error');
+        });
       } catch (error) {
         console.error("Erro durante o login:", error);
-        this.alert = true;
-        this.alertType = 'danger';
-        this.alertText = 'Erro no servidor. Tente novamente mais tarde.';
-        setTimeout(() => (this.alert = false), this.timeout);
+        this.showAlert('Erro', 'Erro no servidor. Tente novamente mais tarde.', 'error');
       }
     } else {
       this.usuarioLogado = true;
     }
-
+  
     return this.usuarioLogado;
   }
 
