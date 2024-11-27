@@ -13,11 +13,11 @@ const cors = require('cors');
 
 dotenv.config();
 
-const {MONGO_URI, MONGO_URI_LOCAL} = process.env
+const { MONGO_URI } = process.env
 
-let url = MONGO_URI_LOCAL ;
+let url = MONGO_URI;
   
-let mongodb = MONGO_URI_LOCAL || url;
+let mongodb = MONGO_URI || url;
 mongoose.connect(mongodb);
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
