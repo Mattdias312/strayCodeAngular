@@ -57,7 +57,7 @@ Este projeto foi desenvolvido utilizando uma combinação de linguagens de progr
 
 ---
 
-## 🖼️ Frameworks, Platforms e Libraries
+## 🖼️ Frameworks & Platforms
 
 Para o desenvolvimento deste projeto, utilizamos uma série de frameworks, plataformas e bibliotecas que otimizaram o processo de criação e garantiram a qualidade e a escalabilidade da aplicação. Esses recursos proporcionaram uma base sólida para o desenvolvimento tanto no front-end quanto no back-end, permitindo uma integração eficiente e funcionalidades avançadas. Abaixo, destacamos as principais ferramentas utilizadas:
 
