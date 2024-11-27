@@ -1,54 +1,49 @@
-<div class="container card mt-6">
-  <div>
-    @if (alert && alertType=='success') {
-      <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{alertText}}</strong>
-      </div>
-    }
-    @if (alert && alertType=='danger') {
-      <div id="myAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{alertText}}</strong>
-      </div>
-    }
-  </div>
-     <h1 class="d-flex justify-content-center">Questionário</h1>
-  <div class="container-fluid col-12 align-items-start espacamento">
-    <form [formGroup]="questionarioForm" #tableForm="ngForm">
-      <label class="form-label align-items-start">Tipo Empresa</label>
+<div class="container d-flex justify-content-center align-items-center min-vh-70">
+  <div class="card col-md-8">
+    <div class="card-body">
+      <h1 class="text-center mb-4">Questionário</h1>
+      <form [formGroup]="questionarioForm" #tableForm="ngForm">
+        <div class="mb-3">
+          <label class="form-label">Tipo Empresa</label>
+          <select class="form-select select2" formControlName="tipo" (change)="popularRamoEmpresa($event)">
+            <option value="">Selecione o tipo de empresa</option>
+            @for (tipo of tipoEmpresaFiltrado; track $index) {
+              <option [value]="tipo.id">{{tipo.nome}}</option>
+            }
+          </select>
+        </div>
 
-      <select class="form-select" formControlName="tipo" (change)="popularRamoEmpresa($event)">
-        @for (tipo of tipoEmpresaFiltrado; track $index) {
-          <option [value]="tipo.id">{{tipo.nome}}</option>
-        }
-      </select>
+        <div class="mb-3">
+          <label class="form-label">Ramo Empresa</label>
+          <select class="form-select select2" formControlName="ramo" (change)="popularCnae($event)">
+            <option value="">Selecione o ramo da empresa</option>
+            @for (ramo of ramoEmpresaFiltrado; track $index) {
+              <option [value]="ramo.id">{{ramo.nome}}</option>
+            }
+          </select>
+        </div>
 
-        <label class="form-label">Ramo Empresa</label>
+        <div class="mb-3">
+          <label class="form-label">CNAE</label>
+          <select class="form-select select2" formControlName="cnae">
+            <option value="">Selecione o CNAE</option>
+            @for (c of cnaeFiltrado; track $index) {
+              <option [value]="c.id">{{c.nome}}</option>
+            }
+          </select>
+        </div>
+      </form>
 
-      <select class="form-select" formControlName="ramo" (change)="popularCnae($event)">
-        @for (ramo of ramoEmpresaFiltrado; track $index) {
-          <option [value]="ramo.id">{{ramo.nome}}</option>
-        }
-      </select>
-
-        <label  class="form-label">CNAE</label>
-
-      <select class="form-select" formControlName="cnae" >
-        @for (c of cnaeFiltrado; track $index) {
-          <option [value]="c.id">{{c.nome}}</option>
-        }
-      </select>
-    </form>
-  </div>
-
-    <div class="container-fluid mt-3">
-      <mat-card-actions class="botaoQuestionario d-flex justify-content-evenly align-items-center">
+      <div class="d-flex justify-content-evenly mt-4">
         @if(toggleEdit){
-          <button mat-raised-button color="warn" (click)="deletar()">Deletar</button>
-          <button mat-raised-button color="primary" (click)="editar()" [disabled]="!edit">Editar</button>
+          <button class="btn btn-danger" (click)="deletar()">Deletar</button>
+          <button class="btn btn-primary" (click)="editar()" [disabled]="!edit">Editar</button>
         } @else {
-          <button mat-raised-button color="warn" (click)="getQuestionario()">Cancelar</button>
+          <button class="btn btn-secondary" (click)="getQuestionario()">Cancelar</button>
         }
-        <button mat-raised-button color="primary" (click)="cadastrar()" [disabled]="edit">Cadastrar Resposta</button>
-      </mat-card-actions>
+        <button class="btn btn-success" (click)="cadastrar()" [disabled]="edit">Cadastrar Resposta</button>
+      </div>
     </div>
+  </div>
 </div>
+
