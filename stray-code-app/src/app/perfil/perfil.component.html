@@ -1,75 +1,51 @@
-<div>
-  @if (alert && alertType=='success') {
-    <div id="myAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>{{alertText}}</strong>
+<div class="container d-flex justify-content-center align-items-center vh">
+  <div class="card col-md-6 profile-card">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">Perfil do Usuário</h2>
+      
+      <div class="mb-3">
+        <label for="usuario" class="form-label">Usuário</label>
+        <input type="text" class="form-control" id="usuario" [value]="infoUsuario.usuario" disabled>
+      </div>
+
+      @if (showResetPassword) {
+        <h3 class="text-center mb-3">Redefinir Senha</h3>
+        <div class="mb-3">
+          <div class="input-group">
+            <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Digite sua senha" [(ngModel)]="password">
+            <button class="btn btn-outline-secondary" type="button" (click)="AlternarVisibilidade()">
+              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="input-group">
+            <input [type]="showPasswordConfirmar ? 'text' : 'password'" class="form-control" placeholder="Confirme sua senha" [(ngModel)]="confirmPassword">
+            <button class="btn btn-outline-secondary" type="button" (click)="AlternarVisibilidadeConfirmar()">
+              <i class="bi" [ngClass]="showPasswordConfirmar ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+        </div>
+
+        <p [ngClass]="passwordLength() ? 'text-success' : 'text-danger'">
+          * A senha deve ter no mínimo 5 caracteres
+        </p>
+        <p [ngClass]="passwordsMatch() ? 'text-success' : 'text-danger'">
+          {{ passwordsMatch() ? '* As senhas coincidem' : '* As senhas não coincidem' }}
+        </p>
+      }
+
+      <div class="d-flex justify-content-center mt-4">
+        @if (!showResetPassword) {
+          <button class="btn btn-danger me-2" (click)="deletar()">Deletar</button>
+          <button class="btn btn-primary me-2" (click)="showRedefinir()">Redefinir Senha</button>
+          <button class="btn btn-secondary" (click)="logout()">Sair</button>
+        } @else {
+          <button class="btn btn-secondary me-2" (click)="showRedefinir()">Cancelar</button>
+          <button class="btn btn-primary" (click)="alterarSenha()">Alterar</button>
+        }
+      </div>
     </div>
-  }
-  @if (alert && alertType=='danger') {
-    <div id="myAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>{{alertText}}</strong>
-    </div>
-  }
-
-</div>
-
-<mat-card-content>
-  <div class="col-md-2">
-    <label for="">Usuário</label>
-    <input type="text" class="form-control" [value]="infoUsuario.usuario" disabled>
-
   </div>
-  @if (showResetPassword){
-
-    <h3 class="redefinir">Redefinir Senha</h3>
-    <div class="password-container col-md-2">
-      <input
-        [type]="showPassword ? 'text' : 'password'"
-        placeholder="Digite sua senha"
-        class="form-control"
-        [(ngModel)]="password" />
-      <i
-        class="toggle-icon"
-        (click)="AlternarVisibilidade()"
-        >
-        <mat-icon>
-          {{ showPassword ? 'visibility' : 'visibility_off' }}
-        </mat-icon>
-      </i>
-    </div>
-    <div class="password-container col-md-2">
-      <input
-        [type]="showPasswordConfirmar ? 'text' : 'password'"
-        placeholder="Digite sua senha"
-        class="form-control"
-        [(ngModel)]="confirmPassword" />
-      <i
-        class="toggle-icon"
-        (click)="AlternarVisibilidadeConfirmar()">
-        <mat-icon>
-          {{ showPasswordConfirmar ? 'visibility' : 'visibility_off' }}
-        </mat-icon>
-      </i>
-    </div>
-
-    <p [ngStyle]="{ color: passwordLength() ? 'green' : 'red' }">
-      {{ '* A senha dete ter no mínimo 5 caracters' }}
-    </p>
-    <p [ngStyle]="{ color: passwordsMatch() ? 'green' : 'red' }">
-      {{ passwordsMatch() ? '* As senhas coincidem' : '* As senhas não coincidem' }}
-    </p>
-  }
-  </mat-card-content>
-
-
-
-  <mat-card-actions class="d-flex justify-content-evenly align-items-center">
-    @if (!showResetPassword){
-      <button mat-raised-button color="warn" (click)="deletar()">Deletar</button>
-      <button mat-raised-button color="primary" (click)="showRedefinir()" >Redefinir Senha</button>
-      <button mat-raised-button color="primary" (click)="logout()">Sair</button>
-    } @else {
-      <button mat-raised-button color="warn" (click)="showRedefinir()" >Cancelar</button>
-      <button mat-raised-button color="primary" (click)="alterarSenha()" >Alterar</button>
-    }
-  </mat-card-actions>
+</div>
 
