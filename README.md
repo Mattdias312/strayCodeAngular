@@ -26,11 +26,11 @@ Este projeto tem por finalidade auxiliar pessoas que desejam abrir empresas, for
 
 A demonstração do projeto exibe as principais funcionalidades implementadas, permitindo explorar as telas, interações e recursos desenvolvidos. Inclui exemplos práticos de uso e destaca como o sistema atende aos requisitos definidos.
 
-### 📌 Demonstração das telas informativas
-![Demonstração das telas informativas](https://github.com/user-attachments/assets/29002911-2c9a-4069-b9cd-1f49b21e0746)
+### 📌 Demonstração das telas informativas e Formulário para cadastro de dados da empresa após realizar o login
+![Demonstração das telas informativas](https://github.com/user-attachments/assets/d8771c33-9b58-4430-bcc7-af069c50d116)
+)
 
-### 📌 Formulário para cadastro de dados da empresa após realizar o login
-![Formulário de cadastro](https://github.com/user-attachments/assets/49ee875c-6b18-422c-9148-0a39a90e0363)
+
 
 ---
 
@@ -38,8 +38,10 @@ A demonstração do projeto exibe as principais funcionalidades implementadas, p
 
 O backlog do projeto lista as tarefas planejadas e pendentes, organizadas por prioridade. Ele inclui melhorias futuras, funcionalidades não implementadas na versão atual e ideias para expandir o escopo do projeto. Esta seção serve como um guia para o desenvolvimento contínuo e colaborações futuras.
 
-![Backlog 1](https://github.com/user-attachments/assets/56f88a41-4ab9-48ec-8e93-c85b15c2c1d9)  
+![Backlog 1](https://github.com/user-attachments/assets/56f88a41-4ab9-48ec-8e93-c85b15c2c1d9) 
+--- 
 ![Backlog 2](https://github.com/user-attachments/assets/eedc524b-1953-4783-9a0d-a517a78ad748)  
+---
 ![Backlog 3](https://github.com/user-attachments/assets/bba11ed5-b5da-4bf3-b192-f27b1a5ae2fa)
 
 ---
